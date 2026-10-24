@@ -2,5 +2,6 @@
   "id": "gittools",
   "name": "Git Tools",
   "version": "1.0.0",
-  "description": "Consulta status e diff do repositório Git na saída da IDE."
+  "description": "Consulta status e diff do repositório Git na saída da IDE.",
+  "image": "cover.png"
 }

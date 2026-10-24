@@ -2,5 +2,6 @@
   "id": "opentk",
   "name": "OpenTK (.NET)",
   "version": "1.0.0",
-  "description": "Template gráfico C# OpenTK com janela e renderização OpenGL para Linux."
+  "description": "Template gráfico C# OpenTK com janela e renderização OpenGL para Linux.",
+  "image": "cover.png"
 }
