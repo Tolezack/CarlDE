@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "plugins": [
+    {
+      "id": "autofix",
+      "name": "AutoCorrigir Código",
+      "description": "Correções automáticas seguras usando Ruff (Python) ou dotnet format (C#).",
+      "version": "1.0.0",
+      "files": [
+        {
+          "path": "plugins/autofix/plugin.json",
+          "sha256": "26e9bbe95f9ffc1eaf7c1cfc4fd78cb2631bf9db4de042292a0e6e03a43448ca"
+        },
+        {
+          "path": "plugins/autofix/plugin.py",
+          "sha256": "a1e11cbfa076bfc49ce512de84f0d593a83b59ac108c997b64d8ff8f01beb239"
+        }
+      ]
+    },
+    {
+      "id": "formatter",
+      "name": "Formatador",
+      "description": "Formatação C/C++ (clang-format), Bash (shfmt) e JSON.",
+      "version": "1.0.0",
+      "files": [
+        {
+          "path": "plugins/formatter/plugin.json",
+          "sha256": "d16db893b3c6e5bddc3ebc6528a3436e743add715e37dc451e7e924230cea704"
+        },
+        {
+          "path": "plugins/formatter/plugin.py",
+          "sha256": "d85fbb3ebd6ee9fcebfb5562999f1820fef3001e72d8f264dc56fd4482121946"
+        }
+      ]
+    },
+    {
+      "id": "gittools",
+      "name": "Git Tools",
+      "description": "Consulta status e diff do repositório Git na saída da IDE.",
+      "version": "1.0.0",
+      "files": [
+        {
+          "path": "plugins/gittools/plugin.json",
+          "sha256": "86d2c04979f3c3fc2baee4d2340170d2f7f9f446d1346bfc55ae695143987208"
+        },
+        {
+          "path": "plugins/gittools/plugin.py",
+          "sha256": "233edbfa06b54e4a669cb313de7f37392ead328f10b9daade3aac8940f38c0d9"
+        }
+      ]
+    },
+    {
+      "id": "opentk",
+      "name": "OpenTK (.NET)",
+      "description": "Template gráfico C# OpenTK com janela e renderização OpenGL para Linux.",
+      "version": "1.0.0",
+      "files": [
+        {
+          "path": "plugins/opentk/plugin.json",
+          "sha256": "ff9a7ef188e85cd7131559a5cbffaad0a21f4e694f41a0f9c89aedfcc34e2f34"
+        },
+        {
+          "path": "plugins/opentk/plugin.py",
+          "sha256": "3de59d6c0e720f9754781d1923d84eb89ae3177672eea7eba6370f046f6a14ea"
+        }
+      ]
+    }
+  ]
+}

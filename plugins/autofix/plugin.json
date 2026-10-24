@@ -1,0 +1,6 @@
+{
+  "id": "autofix",
+  "name": "AutoCorrigir Código",
+  "version": "1.0.0",
+  "description": "Correções automáticas seguras usando Ruff (Python) ou dotnet format (C#)."
+}

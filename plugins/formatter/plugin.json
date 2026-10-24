@@ -1,0 +1,6 @@
+{
+  "id": "formatter",
+  "name": "Formatador",
+  "version": "1.0.0",
+  "description": "Formatação C/C++ (clang-format), Bash (shfmt) e JSON."
+}
