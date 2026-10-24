@@ -54,3 +54,7 @@ Observação: algumas integrações dependem de distribuições, versões de SDK
 - **BrainrotCode**: helpers opcionais C++17/GLFW e C#/OpenTK, templates de projetos e atalhos para terreno/UV/voxel. Consulte `plugins/brainrotcode/README.md`.
 
 Depois de publicar, execute `python3 build_catalog.py` e faça commit do `index.json` atualizado. Bibliotecas `.hpp` e `.cs` são baixadas com o plugin; **não** vêm com a IDE.
+
+## BrainrotCode 1.1 — correção de janela C++
+
+A ação **BrainrotCode · corrigir/criar janela C++ compilável...** recria um exemplo válido em `src/main.cpp`, com `int main()`, instala `include/brainrot.hpp` e configura GLFW/OpenGL no CMake. O arquivo antigo é preservado em backup após confirmação. Para CachyOS/Arch instale `glfw mesa pkgconf cmake gcc`. A sintaxe `BrainrotCode.Brainrot.Window(...)` pertence ao C#, não ao C++.

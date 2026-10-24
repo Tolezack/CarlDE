@@ -5,7 +5,7 @@ Publique as pastas `plugins/` e o arquivo `index.json` na raiz do repositório.
 | Plugin | Categoria | Versão |
 |---|---|---|
 | AutoCorrigir Código (`autofix`) | Editor | 1.0.0 |
-| BrainrotCode (OpenTK + C++ rápido) (`brainrotcode`) | Gráficos | 1.0.0 |
+| BrainrotCode (OpenTK + C++ rápido) (`brainrotcode`) | Gráficos | 1.1.0 |
 | CarlAI Local · Ollama (`carlai`) | IA local | 1.0.0 |
 | CarlComplete (Ollama Ghost Text) (`carlcomplete`) | IA / Editor | 1.0.0 |
 | CarlDebugger · GDB/MI (`carldebugger`) | Debug | 1.0.0 |
