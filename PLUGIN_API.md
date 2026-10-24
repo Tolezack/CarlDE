@@ -19,6 +19,7 @@ def deactivate():
 - `api.project_root`, `api.current_file`, `api.window` são o projeto e UI atual.
 - `api.register_action(key, label, callback, shortcut=None)` cria ação no menu Ferramentas; ao desativar é removida.
 - `api.register_template(id, label, description, base, post_create)` adiciona template na janela Novo Projeto. `base` pode ser `cpp`, `cpp_library`, `python` ou `csharp_console`. O callback recebe `(project_root, project_name)` e retorna lista de `Command` opcionais. Para .NET ele é executado depois do `dotnet new`; para C++/Python executa após criar a pasta.
+- `api.register_editor_hook(callback)` chama callback(CodeEditor) em cada editor aberto e futuro. Desconecte os sinais em `deactivate()`. `CodeEditor.set_ghost_text(str)` desenha sugestão somente visual; Tab aceita, Esc rejeita.
 - `api.run_commands(list[Command], refresh=False)` chama TaskRunner com argumentos como tuplas, sem shell.
 - `api.save_all()`, `api.reload_open_files()`, `api.notify(message,error=False)`.
 - `carlde.plugin_helpers` fornece `context`, `tool`, `commands`, `ask_text`, `ask_choice`, `select_file`, `select_dir`, `confirm` e `show_text`.
@@ -27,3 +28,5 @@ def deactivate():
 `plugin.json` deve declarar `id`, `name`, `version`, `description`, `image`, `category` (nome mostrado na loja), e conter um `cover.png`. Gere `index.json` com `python3 build_catalog.py` antes do push. O catálogo inclui SHA-256 de todos os arquivos.
 
 Atenção: scripts dos plugins não são executados em sandbox e têm acesso aos arquivos do usuário. Não use `shell=True`, não tente elevar permissões sem confirmação e não embarque credenciais no catálogo.
+
+O catálogo também permite arquivos `.cs`, `.hpp`, `.h`, `.cpp`, `.glsl` nos plugins. Imagens e recursos continuam hospedados no repositório GitHub e só são baixados ao instalar o plugin.

@@ -14,7 +14,7 @@ Tolezack/CarlDE
     └── ... 28 outros plugins ...
 ```
 
-A IDE CarlDE 0.4 consulta o catálogo e as capas do GitHub, mas **não baixa o código dos plugins** até você clicar BAIXAR. Depois é necessário ATIVAR. O repositório contém **31 extensões** com implementações iniciais reais ou integração com ferramentas existentes; elas não substituem nem incluem as ferramentas externas (Ollama, clangd, GDB, .NET, Vulkan etc.).
+A IDE CarlDE 0.5 consulta o catálogo e as capas do GitHub, mas **não baixa o código dos plugins** até você clicar BAIXAR. Depois é necessário ATIVAR. O repositório contém **33 extensões** com implementações iniciais reais ou integração com ferramentas existentes; elas não substituem nem incluem as ferramentas externas (Ollama, clangd, GDB, .NET, Vulkan etc.).
 
 ## Como publicar
 
@@ -47,3 +47,10 @@ python3 verify_plugins.py
 ```
 
 Observação: algumas integrações dependem de distribuições, versões de SDK, permissões e ferramentas instaladas. Veja `README.md` do ZIP da IDE para detalhes e limitações.
+
+## Novos plugins
+
+- **CarlComplete**: ghost text via Ollama local. Instale, ative, escolha modelo em Ferramentas e use Tab. Consulte `plugins/carlcomplete/README.md`.
+- **BrainrotCode**: helpers opcionais C++17/GLFW e C#/OpenTK, templates de projetos e atalhos para terreno/UV/voxel. Consulte `plugins/brainrotcode/README.md`.
+
+Depois de publicar, execute `python3 build_catalog.py` e faça commit do `index.json` atualizado. Bibliotecas `.hpp` e `.cs` são baixadas com o plugin; **não** vêm com a IDE.

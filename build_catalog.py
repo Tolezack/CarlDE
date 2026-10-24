@@ -12,7 +12,7 @@ for folder in sorted((base / 'plugins').iterdir()):
     meta = json.loads((folder / 'plugin.json').read_text(encoding='utf-8'))
     records = []
     for file in sorted(folder.rglob('*')):
-        if file.is_file() and file.suffix in ('.py', '.json', '.md', '.txt', '.png', '.svg'):
+        if file.is_file() and file.suffix in ('.py', '.json', '.md', '.txt', '.png', '.svg', '.cs', '.hpp', '.h', '.cpp', '.glsl'):
             records.append({'path': str(file.relative_to(base)), 'sha256': hashlib.sha256(file.read_bytes()).hexdigest()})
     record = {**{key: meta[key] for key in ('id', 'name', 'description', 'version')},
               'category': meta.get('category', 'Ferramentas'), 'files': records}

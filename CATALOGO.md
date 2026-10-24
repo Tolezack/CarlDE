@@ -1,37 +1,39 @@
-# Catálogo CarlDE v4 — 31 extensões
+# Catálogo CarlDE — 33 plugins
 
-| Nome | Categoria | Descrição |
+Publique as pastas `plugins/` e o arquivo `index.json` na raiz do repositório.
+
+| Plugin | Categoria | Versão |
 |---|---|---|
-| **CMake Cleaner** | Build | Limpa as pastas de compilação CMake Debug e Release após confirmação. |
-| **CMake Studio** | Build | Interface visual para padrão C++, flags Debug e variáveis CMake; preserva backup. |
-| **Dependency Manager** | Build | Instala bibliotecas Linux via pacote e OpenTK via NuGet; detecta pacman/apt/dnf. |
-| **Export Manager Linux** | Build | Empacota binário Debug/Release em AppImage, DEB ou RPM; gera manifesto Flatpak. |
-| **CarlDebugger · GDB/MI** | Debug | Depuração visual C++ com GDB/MI: breakpoints, continuar, passo a passo, pilha e expressões. |
-| **Memory Inspector** | Debug | Relatórios reais de memória e leaks via Valgrind Memcheck sobre binário Debug. |
-| **Performance Profiler** | Debug | Perf stat e perf record/report em binários C++ para localizar gargalos. |
-| **AutoCorrigir Código** | Editor | Correções automáticas seguras usando Ruff (Python) ou dotnet format (C#). |
-| **Code Formatter Pro** | Editor | Configura .clang-format e executa clang-format, Ruff, shfmt e dotnet format. |
-| **Formatador** | Editor | Formatação C/C++ (clang-format), Bash (shfmt) e JSON. |
-| **IntelliCode LSP** | Editor | Completar código com clangd, csharp-ls ou basedpyright; navegar para definição e ler diagnósticos reais. |
-| **JSON Studio** | Editor | Validação JSON/JSON Schema opcional, formatação e visualização de erros. |
-| **Regex Tester** | Editor | Laboratório interativo para padrões regex Python com grupos, spans e flags. |
-| **TODO Explorer** | Editor | Localiza TODO, FIXME e HACK nos arquivos do projeto e mostra os resultados na saída. |
-| **Database Explorer** | Ferramentas | Consulta SQLite com tabela e exportação CSV; PostgreSQL via psql e configuração local PG*. |
-| **Documentation Generator** | Ferramentas | Geração de documentação C++ com Doxygen (HTML) e Doxyfile configurável. |
-| **Hex Editor** | Ferramentas | Visualização hexadecimal com edição pontual por offset e backup automático. |
-| **Resource Explorer** | Ferramentas | Localiza imagens, fontes, áudio e modelos; prévia de arquivos e importação em assets/. |
-| **Terminal Profiles** | Ferramentas | Perfis Konsole para Bash, Fish, Zsh, PowerShell e Wine CMD. |
-| **OpenTK 3D (.NET)** | Gráficos | OpenTK .NET real: OpenGL 3D, shaders GLSL editáveis, ações NuGet, compilação/execução e cubo animado. |
-| **SDL Studio** | Gráficos | Templates funcionais SDL2 e SDL3 para C++ com CMake e janela nativa. |
-| **ShaderLab · GLSL** | Gráficos | Compila shaders reais com glslangValidator; abre prévia em glslViewer quando instalado. |
-| **UI Designer** | Gráficos | Gerador visual de janelas Qt Designer (.ui) e Avalonia XAML (.axaml), com campos e botões. |
-| **Vulkan Tools** | Gráficos | Template Vulkan SDK em C++ e compilação de shaders SPIR-V usando glslangValidator. |
-| **CarlAI Local · Ollama** | IA local | Explica, revisa e sugere código via modelos locais Ollama; resposta em janela própria. |
-| **Docker Manager** | Integrações | Build, listar e executar imagens Docker para os seus projetos. |
-| **Git Tools** | Integrações | Consulta status e diff do repositório Git na saída da IDE. |
-| **GitHub Publisher** | Integrações | Publica versões e assets reais via gh release create; autenticação controlada pelo GitHub CLI. |
-| **Project Wizard+** | Projetos | Templates para biblioteca C++ CMake, pacote Python e projeto Python com pytest. |
-| **Code Coverage** | Testes | Cobertura Python por coverage.py e C++ via gcovr (instrumentação do build). |
-| **Test Runner** | Testes | Detecção de pytest, CTest (GoogleTest/Catch2) e dotnet test (xUnit/NUnit). |
-
-Cada plugin precisa ser instalado e ativado na loja; bibliotecas e ferramentas externas não estão incluídas.
+| AutoCorrigir Código (`autofix`) | Editor | 1.0.0 |
+| BrainrotCode (OpenTK + C++ rápido) (`brainrotcode`) | Gráficos | 1.0.0 |
+| CarlAI Local · Ollama (`carlai`) | IA local | 1.0.0 |
+| CarlComplete (Ollama Ghost Text) (`carlcomplete`) | IA / Editor | 1.0.0 |
+| CarlDebugger · GDB/MI (`carldebugger`) | Debug | 1.0.0 |
+| CMake Cleaner (`cmakeclean`) | Build | 1.0.0 |
+| CMake Studio (`cmakestudio`) | Build | 1.0.0 |
+| Code Coverage (`codecoverage`) | Testes | 1.0.0 |
+| Code Formatter Pro (`codeformatterpro`) | Editor | 1.0.0 |
+| Database Explorer (`databaseexplorer`) | Ferramentas | 1.0.0 |
+| Dependency Manager (`dependencymanager`) | Build | 1.0.0 |
+| Docker Manager (`dockermanager`) | Integrações | 1.0.0 |
+| Documentation Generator (`documentationgenerator`) | Ferramentas | 1.0.0 |
+| Export Manager Linux (`exportmanager`) | Build | 1.0.0 |
+| Formatador (`formatter`) | Editor | 1.0.0 |
+| GitHub Publisher (`githubpublisher`) | Integrações | 1.0.0 |
+| Git Tools (`gittools`) | Integrações | 1.0.0 |
+| Hex Editor (`hexeditor`) | Ferramentas | 1.0.0 |
+| IntelliCode LSP (`intellicode`) | Editor | 1.0.0 |
+| JSON Studio (`jsonstudio`) | Editor | 1.0.0 |
+| Memory Inspector (`memoryinspector`) | Debug | 1.0.0 |
+| OpenTK 3D (.NET) (`opentk`) | Gráficos | 2.1.0 |
+| Performance Profiler (`performanceprofiler`) | Debug | 1.0.0 |
+| Project Wizard+ (`projectwizard`) | Projetos | 1.0.0 |
+| Regex Tester (`regextester`) | Editor | 1.0.0 |
+| Resource Explorer (`resourceexplorer`) | Ferramentas | 1.0.0 |
+| SDL Studio (`sdlstudio`) | Gráficos | 1.0.0 |
+| ShaderLab · GLSL (`shaderlab`) | Gráficos | 1.0.0 |
+| Terminal Profiles (`terminalprofiles`) | Ferramentas | 1.0.0 |
+| Test Runner (`testrunner`) | Testes | 1.0.0 |
+| TODO Explorer (`todofinder`) | Editor | 1.0.0 |
+| UI Designer (`uidesigner`) | Gráficos | 1.0.0 |
+| Vulkan Tools (`vulkantools`) | Gráficos | 1.0.0 |
