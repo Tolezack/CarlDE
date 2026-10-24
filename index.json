@@ -23,6 +23,27 @@
       "image": "plugins/autofix/cover.png"
     },
     {
+      "id": "cmakeclean",
+      "name": "CMake Cleaner",
+      "description": "Limpa as pastas de compilação CMake Debug e Release após confirmação.",
+      "version": "1.0.0",
+      "files": [
+        {
+          "path": "plugins/cmakeclean/cover.png",
+          "sha256": "e5a0bd8dadee311caec6b510614d9a65f922dcf3ea0f3226f046ae003ab00fac"
+        },
+        {
+          "path": "plugins/cmakeclean/plugin.json",
+          "sha256": "edefb24552689d8f9c8417054d2f042516556529b9e9f6016006649ca8381422"
+        },
+        {
+          "path": "plugins/cmakeclean/plugin.py",
+          "sha256": "689b79b5df919dea397a2f4467f5a950f8074022f0e35eaea791cd9f7e101924"
+        }
+      ],
+      "image": "plugins/cmakeclean/cover.png"
+    },
+    {
       "id": "formatter",
       "name": "Formatador",
       "description": "Formatação C/C++ (clang-format), Bash (shfmt) e JSON.",
@@ -84,6 +105,27 @@
         }
       ],
       "image": "plugins/opentk/cover.png"
+    },
+    {
+      "id": "todofinder",
+      "name": "TODO Explorer",
+      "description": "Localiza TODO, FIXME e HACK nos arquivos do projeto e mostra os resultados na saída.",
+      "version": "1.0.0",
+      "files": [
+        {
+          "path": "plugins/todofinder/cover.png",
+          "sha256": "369cf918d40208f03d347d7a126aff419638c9a09865cf4384aa8ba39ed69a92"
+        },
+        {
+          "path": "plugins/todofinder/plugin.json",
+          "sha256": "f0fbbf788d8a2d675a944272fe1bc54ce68480781bcfe1e460db10f9f685be62"
+        },
+        {
+          "path": "plugins/todofinder/plugin.py",
+          "sha256": "14a0af62746fa6c6275a0df142511080196a045f55d138a866cad91fcc25b279"
+        }
+      ],
+      "image": "plugins/todofinder/cover.png"
     }
   ]
 }

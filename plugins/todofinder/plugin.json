@@ -1,0 +1,7 @@
+{
+  "id": "todofinder",
+  "name": "TODO Explorer",
+  "description": "Localiza TODO, FIXME e HACK nos arquivos do projeto e mostra os resultados na saída.",
+  "version": "1.0.0",
+  "image": "cover.png"
+}

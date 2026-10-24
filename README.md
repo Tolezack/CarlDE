@@ -1,26 +1,29 @@
-# CarlDE — repositório de plugins (com imagens)
+# CarlDE — Loja de plugins
 
-Publicar **estes arquivos na raiz de um repositório GitHub público**, branch `main`:
+Repositório de plugins e imagens para **CarlDE no Linux**, acessado automaticamente em:
 
-```
-index.json
-build_catalog.py
-README.md
-plugins/
-  opentk/cover.png, plugin.json, plugin.py
-  autofix/cover.png, plugin.json, plugin.py
-  formatter/cover.png, plugin.json, plugin.py
-  gittools/cover.png, plugin.json, plugin.py
-```
+https://github.com/Tolezack/CarlDE
 
-No CarlDE abra **Loja de plugins**, escreva `seu-usuario/carlde-plugins` e `main`, clique **CONECTAR / ATUALIZAR** e depois **BAIXAR**. Os PNGs são exibidos em cada card; os downloads são conferidos por SHA-256. Após baixar, clique **ATIVAR** se decidir executar o plugin.
+## Estrutura
 
-Para criar novos plugins, faça uma pasta em `plugins/`, contendo `plugin.json`, `plugin.py` e, opcionalmente, `cover.png`. No `plugin.json`, inclua `"image": "cover.png"` para a capa. Após qualquer edição de arquivos, execute:
+- `index.json` — catálogo (nome, versão, SHA-256 e arquivo PNG por plugin)
+- `build_catalog.py` — gera novamente os hashes após mudanças
+- `plugins/<id>/plugin.json` — metadados
+- `plugins/<id>/plugin.py` — código da extensão
+- `plugins/<id>/cover.png` — **imagem mostrada na loja diretamente pelo GitHub**
+
+O pacote inclui 6 extensões: OpenTK, AutoCorrigir Código, Formatador, Git Tools, TODO Explorer e CMake Cleaner. Os dois últimos são novos nesta versão.
+
+## Publicar atualização
+
+Extraia o ZIP **diretamente na raiz** de `Tolezack/CarlDE` na branch `main` (substitua o catálogo antigo). Sempre que editar um arquivo ou PNG, rode:
 
 ```bash
 python3 build_catalog.py
 ```
 
-Faça commit/push do catálogo regenerado e de todos os arquivos. **A IDE não contém estes códigos de plugins pré-instalados**; este ZIP é o material para o seu futuro repositório.
+Depois faça commit/push do `index.json` e do conteúdo de `plugins/`.
 
-**Segurança:** plugin é código Python executado com permissão do usuário. Os hashes não provam a identidade do autor.
+**Não é necessário enviar o código-fonte da IDE a este repositório** para carregar os plugins. O CarlDE só usa o catálogo e as imagens até você clicar BAIXAR, e nenhum plugin é ativado automaticamente.
+
+> Segurança: uma extensão é código Python executado sob sua conta local. Instale e ative apenas conteúdo confiável. A verificação SHA-256 evita dados adulterados em trânsito em relação ao próprio catálogo, mas não substitui assinaturas ou revisão de código.
