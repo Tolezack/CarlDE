@@ -1,0 +1,8 @@
+{
+  "id": "carlcomplete",
+  "name": "CarlComplete (Ollama Ghost Text)",
+  "version": "1.0.0",
+  "description": "Autocomplete de linhas de código no Ollama local: sugestão cinza, Tab aceita, Esc descarta, consulta assíncrona.",
+  "category": "IA / Editor",
+  "image": "cover.png"
+}
