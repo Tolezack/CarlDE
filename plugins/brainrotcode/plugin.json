@@ -1,7 +1,7 @@
 {
   "id": "brainrotcode",
   "name": "BrainrotCode (OpenTK + C++ rápido)",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Atalhos reais para janelas OpenGL, terrenos procedurais, blocos voxel e atlas UV em C++17/GLFW e C#/OpenTK.",
   "category": "Gráficos",
   "image": "cover.png"

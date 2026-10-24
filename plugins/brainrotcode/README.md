@@ -33,3 +33,26 @@ var uv = BrainrotCode.Brainrot.BlockUV(5,16,16);
 ```
 
 `Block` retorna vértices e índices; **não chama o renderer automaticamente**. Renderize com seus próprios shaders e VBO/VAO. As alturas são determinísticas em ambas as versões, mas não garantimos resultados bit a bit idênticos entre C++ e C#.
+
+
+## Corrigir o erro `br does not name a type`
+
+C++ não executa funções soltas na raiz de um `.cpp`. **É obrigatório** ter `#include "brainrot.hpp"` e colocar a chamada em `int main()`. No CarlDE, **Ferramentas → BrainrotCode → corrigir/criar janela C++ compilável...** cria um `src/main.cpp` pronto, coloca o header em `include/`, configura o CMake e faz backup do código antigo (com confirmação).
+
+No CachyOS/Arch atual:
+
+```bash
+sudo pacman -S --needed glfw mesa pkgconf cmake gcc
+```
+
+O `C# BrainrotCode.Brainrot.Window(...)` funciona **somente** em projetos C# com OpenTK e `.csproj`, não em `main.cpp`.
+
+Para compilar manualmente C++:
+
+```bash
+cmake -S . -B build/Debug -DCMAKE_BUILD_TYPE=Debug
+cmake --build build/Debug
+./build/Debug/NOME_DO_PROJETO
+```
+
+> A biblioteca `br::terrain`/`br::block_uv` pode funcionar sem GLFW. A janela `br::window` precisa de GLFW e OpenGL configurados no CMake.
