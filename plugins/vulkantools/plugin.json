@@ -1,0 +1,8 @@
+{
+  "id": "vulkantools",
+  "name": "Vulkan Tools",
+  "version": "1.0.0",
+  "description": "Template Vulkan SDK em C++ e compilação de shaders SPIR-V usando glslangValidator.",
+  "image": "cover.png",
+  "category": "Gráficos"
+}

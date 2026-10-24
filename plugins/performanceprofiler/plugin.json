@@ -1,0 +1,8 @@
+{
+  "id": "performanceprofiler",
+  "name": "Performance Profiler",
+  "version": "1.0.0",
+  "description": "Perf stat e perf record/report em binários C++ para localizar gargalos.",
+  "image": "cover.png",
+  "category": "Debug"
+}

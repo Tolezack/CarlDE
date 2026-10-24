@@ -1,0 +1,8 @@
+{
+  "id": "databaseexplorer",
+  "name": "Database Explorer",
+  "version": "1.0.0",
+  "description": "Consulta SQLite com tabela e exportação CSV; PostgreSQL via psql e configuração local PG*.",
+  "image": "cover.png",
+  "category": "Ferramentas"
+}

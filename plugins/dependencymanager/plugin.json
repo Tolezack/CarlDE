@@ -1,0 +1,8 @@
+{
+  "id": "dependencymanager",
+  "name": "Dependency Manager",
+  "version": "1.0.0",
+  "description": "Instala bibliotecas Linux via pacote e OpenTK via NuGet; detecta pacman/apt/dnf.",
+  "image": "cover.png",
+  "category": "Build"
+}

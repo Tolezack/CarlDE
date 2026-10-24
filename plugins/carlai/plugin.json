@@ -1,0 +1,8 @@
+{
+  "id": "carlai",
+  "name": "CarlAI Local · Ollama",
+  "version": "1.0.0",
+  "description": "Explica, revisa e sugere código via modelos locais Ollama; resposta em janela própria.",
+  "image": "cover.png",
+  "category": "IA local"
+}

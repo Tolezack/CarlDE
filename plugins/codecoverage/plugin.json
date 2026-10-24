@@ -1,0 +1,8 @@
+{
+  "id": "codecoverage",
+  "name": "Code Coverage",
+  "version": "1.0.0",
+  "description": "Cobertura Python por coverage.py e C++ via gcovr (instrumentação do build).",
+  "image": "cover.png",
+  "category": "Testes"
+}

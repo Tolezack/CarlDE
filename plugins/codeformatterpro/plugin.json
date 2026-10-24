@@ -1,0 +1,8 @@
+{
+  "id": "codeformatterpro",
+  "name": "Code Formatter Pro",
+  "version": "1.0.0",
+  "description": "Configura .clang-format e executa clang-format, Ruff, shfmt e dotnet format.",
+  "image": "cover.png",
+  "category": "Editor"
+}

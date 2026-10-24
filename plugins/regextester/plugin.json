@@ -1,0 +1,8 @@
+{
+  "id": "regextester",
+  "name": "Regex Tester",
+  "version": "1.0.0",
+  "description": "Laboratório interativo para padrões regex Python com grupos, spans e flags.",
+  "image": "cover.png",
+  "category": "Editor"
+}

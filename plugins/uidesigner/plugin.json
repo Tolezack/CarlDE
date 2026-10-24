@@ -1,0 +1,8 @@
+{
+  "id": "uidesigner",
+  "name": "UI Designer",
+  "version": "1.0.0",
+  "description": "Gerador visual de janelas Qt Designer (.ui) e Avalonia XAML (.axaml), com campos e botões.",
+  "image": "cover.png",
+  "category": "Gráficos"
+}

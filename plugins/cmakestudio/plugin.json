@@ -1,0 +1,8 @@
+{
+  "id": "cmakestudio",
+  "name": "CMake Studio",
+  "version": "1.0.0",
+  "description": "Interface visual para padrão C++, flags Debug e variáveis CMake; preserva backup.",
+  "image": "cover.png",
+  "category": "Build"
+}

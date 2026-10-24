@@ -1,0 +1,8 @@
+{
+  "id": "resourceexplorer",
+  "name": "Resource Explorer",
+  "version": "1.0.0",
+  "description": "Localiza imagens, fontes, áudio e modelos; prévia de arquivos e importação em assets/.",
+  "image": "cover.png",
+  "category": "Ferramentas"
+}

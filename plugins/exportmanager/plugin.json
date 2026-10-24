@@ -1,0 +1,8 @@
+{
+  "id": "exportmanager",
+  "name": "Export Manager Linux",
+  "version": "1.0.0",
+  "description": "Empacota binário Debug/Release em AppImage, DEB ou RPM; gera manifesto Flatpak.",
+  "image": "cover.png",
+  "category": "Build"
+}

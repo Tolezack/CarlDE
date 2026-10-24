@@ -1,0 +1,8 @@
+{
+  "id": "hexeditor",
+  "name": "Hex Editor",
+  "version": "1.0.0",
+  "description": "Visualização hexadecimal com edição pontual por offset e backup automático.",
+  "image": "cover.png",
+  "category": "Ferramentas"
+}

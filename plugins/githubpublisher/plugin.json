@@ -1,0 +1,8 @@
+{
+  "id": "githubpublisher",
+  "name": "GitHub Publisher",
+  "version": "1.0.0",
+  "description": "Publica versões e assets reais via gh release create; autenticação controlada pelo GitHub CLI.",
+  "image": "cover.png",
+  "category": "Integrações"
+}

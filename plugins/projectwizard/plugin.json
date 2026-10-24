@@ -1,0 +1,8 @@
+{
+  "id": "projectwizard",
+  "name": "Project Wizard+",
+  "version": "1.0.0",
+  "description": "Templates para biblioteca C++ CMake, pacote Python e projeto Python com pytest.",
+  "image": "cover.png",
+  "category": "Projetos"
+}

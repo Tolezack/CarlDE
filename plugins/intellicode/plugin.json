@@ -1,0 +1,8 @@
+{
+  "id": "intellicode",
+  "name": "IntelliCode LSP",
+  "version": "1.0.0",
+  "description": "Completar código com clangd, csharp-ls ou basedpyright; navegar para definição e ler diagnósticos reais.",
+  "image": "cover.png",
+  "category": "Editor"
+}

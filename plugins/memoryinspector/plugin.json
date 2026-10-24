@@ -1,0 +1,8 @@
+{
+  "id": "memoryinspector",
+  "name": "Memory Inspector",
+  "version": "1.0.0",
+  "description": "Relatórios reais de memória e leaks via Valgrind Memcheck sobre binário Debug.",
+  "image": "cover.png",
+  "category": "Debug"
+}

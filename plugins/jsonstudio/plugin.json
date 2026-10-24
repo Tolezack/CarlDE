@@ -1,0 +1,8 @@
+{
+  "id": "jsonstudio",
+  "name": "JSON Studio",
+  "version": "1.0.0",
+  "description": "Validação JSON/JSON Schema opcional, formatação e visualização de erros.",
+  "image": "cover.png",
+  "category": "Editor"
+}

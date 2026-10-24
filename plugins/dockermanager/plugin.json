@@ -1,0 +1,8 @@
+{
+  "id": "dockermanager",
+  "name": "Docker Manager",
+  "version": "1.0.0",
+  "description": "Build, listar e executar imagens Docker para os seus projetos.",
+  "image": "cover.png",
+  "category": "Integrações"
+}

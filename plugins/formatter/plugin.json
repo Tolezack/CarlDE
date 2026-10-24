@@ -3,5 +3,6 @@
   "name": "Formatador",
   "version": "1.0.0",
   "description": "Formatação C/C++ (clang-format), Bash (shfmt) e JSON.",
-  "image": "cover.png"
+  "image": "cover.png",
+  "category": "Editor"
 }

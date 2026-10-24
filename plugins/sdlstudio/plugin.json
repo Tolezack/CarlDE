@@ -1,0 +1,8 @@
+{
+  "id": "sdlstudio",
+  "name": "SDL Studio",
+  "version": "1.0.0",
+  "description": "Templates funcionais SDL2 e SDL3 para C++ com CMake e janela nativa.",
+  "image": "cover.png",
+  "category": "Gráficos"
+}

@@ -6,14 +6,15 @@
       "name": "AutoCorrigir Código",
       "description": "Correções automáticas seguras usando Ruff (Python) ou dotnet format (C#).",
       "version": "1.0.0",
+      "category": "Editor",
       "files": [
         {
           "path": "plugins/autofix/cover.png",
-          "sha256": "5b5541c600169c280cd64f7e34121d412dbe6fbe3fa281d7fe2a7e45db5f82e0"
+          "sha256": "a4a53dde76858761d6c0048ec09b43334d16e7c0c5e7ffdf883893117bdbd350"
         },
         {
           "path": "plugins/autofix/plugin.json",
-          "sha256": "216096c1176529e8cfcafd1d621d8da2274a36caee9f39d0bc765b50f23a5954"
+          "sha256": "0d08f24f472b9b495ff3fe852c8a40441799f5c7c0a41a43178997cf3adbb3a7"
         },
         {
           "path": "plugins/autofix/plugin.py",
@@ -23,18 +24,63 @@
       "image": "plugins/autofix/cover.png"
     },
     {
+      "id": "carlai",
+      "name": "CarlAI Local · Ollama",
+      "description": "Explica, revisa e sugere código via modelos locais Ollama; resposta em janela própria.",
+      "version": "1.0.0",
+      "category": "IA local",
+      "files": [
+        {
+          "path": "plugins/carlai/cover.png",
+          "sha256": "3110a634f39a285c3e1d2bf8d7153695966a5756adc8707d8dc5c6e70ea229a5"
+        },
+        {
+          "path": "plugins/carlai/plugin.json",
+          "sha256": "9355c930f375b6d292915a7b17680e23f5a476143ec475577ee39a569fd1785b"
+        },
+        {
+          "path": "plugins/carlai/plugin.py",
+          "sha256": "ea9da060f2e2751c3fac032c80bb264971057bf47e51e4d4e6aaf60a9e517d07"
+        }
+      ],
+      "image": "plugins/carlai/cover.png"
+    },
+    {
+      "id": "carldebugger",
+      "name": "CarlDebugger · GDB/MI",
+      "description": "Depuração visual C++ com GDB/MI: breakpoints, continuar, passo a passo, pilha e expressões.",
+      "version": "1.0.0",
+      "category": "Debug",
+      "files": [
+        {
+          "path": "plugins/carldebugger/cover.png",
+          "sha256": "c775e48dc7b26ecea1b5c1e8f27b1a2b1a0a46ef3a05f02e7d8dde5909ecf609"
+        },
+        {
+          "path": "plugins/carldebugger/plugin.json",
+          "sha256": "1b1e9ab93991df1eb1bb96a0b64a09d5a51692d7590ad5972a20e8382a3c4d7e"
+        },
+        {
+          "path": "plugins/carldebugger/plugin.py",
+          "sha256": "39f4aa32f45ecbc4cf5f81a59b6b2bb1b9e4c0662bc38b3d8cb2df5f64e539e6"
+        }
+      ],
+      "image": "plugins/carldebugger/cover.png"
+    },
+    {
       "id": "cmakeclean",
       "name": "CMake Cleaner",
       "description": "Limpa as pastas de compilação CMake Debug e Release após confirmação.",
       "version": "1.0.0",
+      "category": "Build",
       "files": [
         {
           "path": "plugins/cmakeclean/cover.png",
-          "sha256": "e5a0bd8dadee311caec6b510614d9a65f922dcf3ea0f3226f046ae003ab00fac"
+          "sha256": "da2ed26588580f09c30e4a833c49079f81096a57e647fd34ebc51796720dcfb3"
         },
         {
           "path": "plugins/cmakeclean/plugin.json",
-          "sha256": "edefb24552689d8f9c8417054d2f042516556529b9e9f6016006649ca8381422"
+          "sha256": "4a495279a5bff7da97411acc55038223b3829878b5ab36c3418bba9d4cb31e8b"
         },
         {
           "path": "plugins/cmakeclean/plugin.py",
@@ -44,18 +90,195 @@
       "image": "plugins/cmakeclean/cover.png"
     },
     {
+      "id": "cmakestudio",
+      "name": "CMake Studio",
+      "description": "Interface visual para padrão C++, flags Debug e variáveis CMake; preserva backup.",
+      "version": "1.0.0",
+      "category": "Build",
+      "files": [
+        {
+          "path": "plugins/cmakestudio/cover.png",
+          "sha256": "298f64b12afb1004008c2d9cf03a501ea172f00e1fbcf88c66febc769dd18bbd"
+        },
+        {
+          "path": "plugins/cmakestudio/plugin.json",
+          "sha256": "f96d45c4fc22849baa9c63ad591ea6bb7be2ad1c9663952812a2db85d22cfe69"
+        },
+        {
+          "path": "plugins/cmakestudio/plugin.py",
+          "sha256": "794c6d4305084ecec0618b1959a3c796d82b723c8c997c1c1cdd63a59d343b58"
+        }
+      ],
+      "image": "plugins/cmakestudio/cover.png"
+    },
+    {
+      "id": "codecoverage",
+      "name": "Code Coverage",
+      "description": "Cobertura Python por coverage.py e C++ via gcovr (instrumentação do build).",
+      "version": "1.0.0",
+      "category": "Testes",
+      "files": [
+        {
+          "path": "plugins/codecoverage/cover.png",
+          "sha256": "80433a09555092ebb9555ad6cf5fb0fdcad02aa653cdb00ccc32609a69f017c1"
+        },
+        {
+          "path": "plugins/codecoverage/plugin.json",
+          "sha256": "7660fc7f113a70b4a1b7c59dfbd8cba4d0cc894d49f04f0da8ca7e2ef1140913"
+        },
+        {
+          "path": "plugins/codecoverage/plugin.py",
+          "sha256": "480f1826dcdc3786dbaeb6e107cebcf59a0c8a7be1d2001dcff7f1fccea57e44"
+        }
+      ],
+      "image": "plugins/codecoverage/cover.png"
+    },
+    {
+      "id": "codeformatterpro",
+      "name": "Code Formatter Pro",
+      "description": "Configura .clang-format e executa clang-format, Ruff, shfmt e dotnet format.",
+      "version": "1.0.0",
+      "category": "Editor",
+      "files": [
+        {
+          "path": "plugins/codeformatterpro/cover.png",
+          "sha256": "7b8a3be006d75388a5a5f9b0fc2a6a65cbcfc7bb03edf43a586e6e4e21f83256"
+        },
+        {
+          "path": "plugins/codeformatterpro/plugin.json",
+          "sha256": "265dd5b79ea94956e6d3f61b18625ced7e62a49012b5b5b56cdb7c6c82eb5551"
+        },
+        {
+          "path": "plugins/codeformatterpro/plugin.py",
+          "sha256": "8bf3cde34c7628f14b8c271cb8a28dd4f4eea7000743b919e71b5a36f82e37ce"
+        }
+      ],
+      "image": "plugins/codeformatterpro/cover.png"
+    },
+    {
+      "id": "databaseexplorer",
+      "name": "Database Explorer",
+      "description": "Consulta SQLite com tabela e exportação CSV; PostgreSQL via psql e configuração local PG*.",
+      "version": "1.0.0",
+      "category": "Ferramentas",
+      "files": [
+        {
+          "path": "plugins/databaseexplorer/cover.png",
+          "sha256": "1ac6b8b7c22460cd1a9fb23f7d56d911748593da041d849e5e3c59147562ccdc"
+        },
+        {
+          "path": "plugins/databaseexplorer/plugin.json",
+          "sha256": "76ae639aeb79af14c76b9ea90437ca728f56878901cdda4012a7e85d22f8008d"
+        },
+        {
+          "path": "plugins/databaseexplorer/plugin.py",
+          "sha256": "96e8a2e53d200211c2da06149f37c59358077228957abb7dfa5ab2dcc8a586f3"
+        }
+      ],
+      "image": "plugins/databaseexplorer/cover.png"
+    },
+    {
+      "id": "dependencymanager",
+      "name": "Dependency Manager",
+      "description": "Instala bibliotecas Linux via pacote e OpenTK via NuGet; detecta pacman/apt/dnf.",
+      "version": "1.0.0",
+      "category": "Build",
+      "files": [
+        {
+          "path": "plugins/dependencymanager/cover.png",
+          "sha256": "c2a1e7d425c44af7b93443e2814253d38e13d7343ef9c47316c814687b4e2f5c"
+        },
+        {
+          "path": "plugins/dependencymanager/plugin.json",
+          "sha256": "d0262dd861fb112d673f0043675f2dd6d23c386617da644bece3ce7a6246f869"
+        },
+        {
+          "path": "plugins/dependencymanager/plugin.py",
+          "sha256": "07b6eac1420638550ec6031729041f5d51f6a33e17f5b2cce1dc9f1017cfb6e5"
+        }
+      ],
+      "image": "plugins/dependencymanager/cover.png"
+    },
+    {
+      "id": "dockermanager",
+      "name": "Docker Manager",
+      "description": "Build, listar e executar imagens Docker para os seus projetos.",
+      "version": "1.0.0",
+      "category": "Integrações",
+      "files": [
+        {
+          "path": "plugins/dockermanager/cover.png",
+          "sha256": "2dfa29c67055766180238a805dc303e5e09305f6b48e46672d8ee5be9cedd2b3"
+        },
+        {
+          "path": "plugins/dockermanager/plugin.json",
+          "sha256": "1ab14fcbff5166b91ac9b8bcfeb9894e0abcca513a6c85042f9992d9ae05bb9f"
+        },
+        {
+          "path": "plugins/dockermanager/plugin.py",
+          "sha256": "05278199daddfdad45f281f13ac4b1129e6c4a044fcc1e6b51ee54d11eafdfdb"
+        }
+      ],
+      "image": "plugins/dockermanager/cover.png"
+    },
+    {
+      "id": "documentationgenerator",
+      "name": "Documentation Generator",
+      "description": "Geração de documentação C++ com Doxygen (HTML) e Doxyfile configurável.",
+      "version": "1.0.0",
+      "category": "Ferramentas",
+      "files": [
+        {
+          "path": "plugins/documentationgenerator/cover.png",
+          "sha256": "2b53739b652df3777e021d8f3038c55d3a4cdaeea94d964246aaef53873711e8"
+        },
+        {
+          "path": "plugins/documentationgenerator/plugin.json",
+          "sha256": "722fe48a21ff7272d8b97df29e08245904d75a6af46c9d3a93a17709817362e5"
+        },
+        {
+          "path": "plugins/documentationgenerator/plugin.py",
+          "sha256": "3045f5c8f46f93d06f3348e7e5a1d93a175e6da48e3a8eed4d0a6497b71aec73"
+        }
+      ],
+      "image": "plugins/documentationgenerator/cover.png"
+    },
+    {
+      "id": "exportmanager",
+      "name": "Export Manager Linux",
+      "description": "Empacota binário Debug/Release em AppImage, DEB ou RPM; gera manifesto Flatpak.",
+      "version": "1.0.0",
+      "category": "Build",
+      "files": [
+        {
+          "path": "plugins/exportmanager/cover.png",
+          "sha256": "52656fd675594464a50811543015fd7e2207f2afc24d1a618fa595e180044aa3"
+        },
+        {
+          "path": "plugins/exportmanager/plugin.json",
+          "sha256": "cf0bb59292f7ea9a2f991a6bd52635ea0d2ce25b54e52d88265898785983f3e8"
+        },
+        {
+          "path": "plugins/exportmanager/plugin.py",
+          "sha256": "350d419b64995deb2498ad82417fd50155d6ab7137d1497d49a27c098a9a1f2d"
+        }
+      ],
+      "image": "plugins/exportmanager/cover.png"
+    },
+    {
       "id": "formatter",
       "name": "Formatador",
       "description": "Formatação C/C++ (clang-format), Bash (shfmt) e JSON.",
       "version": "1.0.0",
+      "category": "Editor",
       "files": [
         {
           "path": "plugins/formatter/cover.png",
-          "sha256": "ecaa7d1745f98f567ffb79245a73f27e58a369db4c84daa26e2211e4345b720a"
+          "sha256": "d6dab2da53402b21011d28a7bf2f01bda98db1cbe2d0ded51312613c75784a8e"
         },
         {
           "path": "plugins/formatter/plugin.json",
-          "sha256": "b657d854c92aa4914c1ef5fe9d23641c64500b86cb196ea71452ec39e61b42c5"
+          "sha256": "76e4ac6934ca14c5636785f6814bfa43046b4f0c85be8d298010edbeaf2f940e"
         },
         {
           "path": "plugins/formatter/plugin.py",
@@ -65,18 +288,41 @@
       "image": "plugins/formatter/cover.png"
     },
     {
+      "id": "githubpublisher",
+      "name": "GitHub Publisher",
+      "description": "Publica versões e assets reais via gh release create; autenticação controlada pelo GitHub CLI.",
+      "version": "1.0.0",
+      "category": "Integrações",
+      "files": [
+        {
+          "path": "plugins/githubpublisher/cover.png",
+          "sha256": "311685e62f60111798165b00a850a71c7b3b9ca4a861b46c9fff1c0d79207b6b"
+        },
+        {
+          "path": "plugins/githubpublisher/plugin.json",
+          "sha256": "b542e9127bb44b0d143185764f4fab5593735e113e80b6cca4d0d4634b645b4f"
+        },
+        {
+          "path": "plugins/githubpublisher/plugin.py",
+          "sha256": "d82fbe3baee429dc8021ed8c3a7d22d2b5c667b8967e6e8ebad8ef16661a24fb"
+        }
+      ],
+      "image": "plugins/githubpublisher/cover.png"
+    },
+    {
       "id": "gittools",
       "name": "Git Tools",
       "description": "Consulta status e diff do repositório Git na saída da IDE.",
       "version": "1.0.0",
+      "category": "Integrações",
       "files": [
         {
           "path": "plugins/gittools/cover.png",
-          "sha256": "129b6f5092bdc0f5adb83f892305de217f068a78e546e2d26ec6e242bb08d983"
+          "sha256": "908d3f049bcfc6d2410eed66829bc39604b4227e23e0eb2d1ffc13f2cbd54045"
         },
         {
           "path": "plugins/gittools/plugin.json",
-          "sha256": "246c29e2f5b026c332396206169b8b08f66a3758b2d28b8870eabb24fa940583"
+          "sha256": "b474fa37bb22d7a97e1d50db8e33759ecdbdffa6889ae6d69a4b7d0edc499056"
         },
         {
           "path": "plugins/gittools/plugin.py",
@@ -86,39 +332,305 @@
       "image": "plugins/gittools/cover.png"
     },
     {
-      "id": "opentk",
-      "name": "OpenTK (.NET)",
-      "description": "Template gráfico C# OpenTK com janela e renderização OpenGL para Linux.",
+      "id": "hexeditor",
+      "name": "Hex Editor",
+      "description": "Visualização hexadecimal com edição pontual por offset e backup automático.",
       "version": "1.0.0",
+      "category": "Ferramentas",
+      "files": [
+        {
+          "path": "plugins/hexeditor/cover.png",
+          "sha256": "1ff94799aefec6b7bf05c8bad5d6244ab451eacd77d2657dae22f7f213d817aa"
+        },
+        {
+          "path": "plugins/hexeditor/plugin.json",
+          "sha256": "be072a6d5372259ffdd53dd7610ba2e6b5928ca8d650f566651799c4369739e2"
+        },
+        {
+          "path": "plugins/hexeditor/plugin.py",
+          "sha256": "b3675666cb6cd651422488e68ffabd0b3d1f922ed9c3544ba95d491403c71108"
+        }
+      ],
+      "image": "plugins/hexeditor/cover.png"
+    },
+    {
+      "id": "intellicode",
+      "name": "IntelliCode LSP",
+      "description": "Completar código com clangd, csharp-ls ou basedpyright; navegar para definição e ler diagnósticos reais.",
+      "version": "1.0.0",
+      "category": "Editor",
+      "files": [
+        {
+          "path": "plugins/intellicode/cover.png",
+          "sha256": "687a478a126c5b66ced1478ab86fd371b8b39df9e9fe93b7422f9ffab5491f35"
+        },
+        {
+          "path": "plugins/intellicode/plugin.json",
+          "sha256": "f28bdc1518066d89a629432f6e98e173a4a0efc22a86ace87d10e55466c25fc7"
+        },
+        {
+          "path": "plugins/intellicode/plugin.py",
+          "sha256": "18d8fc7621c0a56775aaba0142f8d9bab26700d06f7d3768435781763ccfee84"
+        }
+      ],
+      "image": "plugins/intellicode/cover.png"
+    },
+    {
+      "id": "jsonstudio",
+      "name": "JSON Studio",
+      "description": "Validação JSON/JSON Schema opcional, formatação e visualização de erros.",
+      "version": "1.0.0",
+      "category": "Editor",
+      "files": [
+        {
+          "path": "plugins/jsonstudio/cover.png",
+          "sha256": "1dfed78d50d8bb444fe40e8a15a5a5bb0abe6a6d95c4ddd93501f1f1b5b942a7"
+        },
+        {
+          "path": "plugins/jsonstudio/plugin.json",
+          "sha256": "3b812f1fa0ad682c63d9d1496da77f335a5fe79c10f4505ce12c92c75dfbef5c"
+        },
+        {
+          "path": "plugins/jsonstudio/plugin.py",
+          "sha256": "39716c7ccaae20fa2f137c13acb5f8ec9e2e44e4d75938f21caead9a57695758"
+        }
+      ],
+      "image": "plugins/jsonstudio/cover.png"
+    },
+    {
+      "id": "memoryinspector",
+      "name": "Memory Inspector",
+      "description": "Relatórios reais de memória e leaks via Valgrind Memcheck sobre binário Debug.",
+      "version": "1.0.0",
+      "category": "Debug",
+      "files": [
+        {
+          "path": "plugins/memoryinspector/cover.png",
+          "sha256": "6a77acae591033b34418d1892eced84702601d2016e93e0ca66714603e9f4c8c"
+        },
+        {
+          "path": "plugins/memoryinspector/plugin.json",
+          "sha256": "2cebcb23c2a398d531f35c9051a323aee5b700cf4a5aa9a3360057024450147a"
+        },
+        {
+          "path": "plugins/memoryinspector/plugin.py",
+          "sha256": "d3ce96b3b2bf1eae75e26028e11a116e4cfaa1bfabf23cf1ef3cd1641a8b8df4"
+        }
+      ],
+      "image": "plugins/memoryinspector/cover.png"
+    },
+    {
+      "id": "opentk",
+      "name": "OpenTK 3D (.NET)",
+      "description": "OpenTK .NET real: OpenGL 3D, shaders GLSL editáveis, ações NuGet, compilação/execução e cubo animado.",
+      "version": "2.1.0",
+      "category": "Gráficos",
       "files": [
         {
           "path": "plugins/opentk/cover.png",
-          "sha256": "1ac69a0ba138dd9c6352fc0cd353a21d4cb2fd5b9b68a7a104ee415cf27297bb"
+          "sha256": "b90ecf61f9efbcfd83393db36232014644bda1b640da12cb714f48728b9d00fd"
         },
         {
           "path": "plugins/opentk/plugin.json",
-          "sha256": "54f1633cd34fa17ffc72b15baa74d29977a6007d9d2ba9fff52794453eba5d63"
+          "sha256": "d15dda72307170404bf91d26df3a28feed04e6e25dff0656011e075c744582b3"
         },
         {
           "path": "plugins/opentk/plugin.py",
-          "sha256": "3de59d6c0e720f9754781d1923d84eb89ae3177672eea7eba6370f046f6a14ea"
+          "sha256": "b5113babe8da276d6c0bca61a24bfdefd9a315381e9130fe3192bf2708102245"
         }
       ],
       "image": "plugins/opentk/cover.png"
+    },
+    {
+      "id": "performanceprofiler",
+      "name": "Performance Profiler",
+      "description": "Perf stat e perf record/report em binários C++ para localizar gargalos.",
+      "version": "1.0.0",
+      "category": "Debug",
+      "files": [
+        {
+          "path": "plugins/performanceprofiler/cover.png",
+          "sha256": "37edf4ef23ed1a8c98d9d3cddc1ad3de0fc4f58cb2d233708ffba58742c83645"
+        },
+        {
+          "path": "plugins/performanceprofiler/plugin.json",
+          "sha256": "8531bc0b1d31996a6387c69ff42006cd34b2e8322628af9943d717cbefab9d45"
+        },
+        {
+          "path": "plugins/performanceprofiler/plugin.py",
+          "sha256": "348a12f48bd783c90b2442fa06c41626a406d969d6694db9dc5ffa2709470334"
+        }
+      ],
+      "image": "plugins/performanceprofiler/cover.png"
+    },
+    {
+      "id": "projectwizard",
+      "name": "Project Wizard+",
+      "description": "Templates para biblioteca C++ CMake, pacote Python e projeto Python com pytest.",
+      "version": "1.0.0",
+      "category": "Projetos",
+      "files": [
+        {
+          "path": "plugins/projectwizard/cover.png",
+          "sha256": "33b44a6e027842c501231227d9e23a5eb6d361f2c83562627be7c5b8107c4c07"
+        },
+        {
+          "path": "plugins/projectwizard/plugin.json",
+          "sha256": "e69c25d9627abd77f499e4eb7f35b7fdfbee81b1d3beb5c4b662a678a41a2392"
+        },
+        {
+          "path": "plugins/projectwizard/plugin.py",
+          "sha256": "7bce9838e65d8d5b7c3f1fba04c6dbd27155cd963d31d1ee1387926815de05fc"
+        }
+      ],
+      "image": "plugins/projectwizard/cover.png"
+    },
+    {
+      "id": "regextester",
+      "name": "Regex Tester",
+      "description": "Laboratório interativo para padrões regex Python com grupos, spans e flags.",
+      "version": "1.0.0",
+      "category": "Editor",
+      "files": [
+        {
+          "path": "plugins/regextester/cover.png",
+          "sha256": "6c2e18953c7148f5a7c0fe7156671efefa697022b1b232971445da258a62be9a"
+        },
+        {
+          "path": "plugins/regextester/plugin.json",
+          "sha256": "e79c6b83b55ad6e79cbda902468f4753abdcda4f50450646ac9fbb67293ee431"
+        },
+        {
+          "path": "plugins/regextester/plugin.py",
+          "sha256": "20c8376876ee0f1af37e3647cba3baccdad99eefe61869292805180475ed67b6"
+        }
+      ],
+      "image": "plugins/regextester/cover.png"
+    },
+    {
+      "id": "resourceexplorer",
+      "name": "Resource Explorer",
+      "description": "Localiza imagens, fontes, áudio e modelos; prévia de arquivos e importação em assets/.",
+      "version": "1.0.0",
+      "category": "Ferramentas",
+      "files": [
+        {
+          "path": "plugins/resourceexplorer/cover.png",
+          "sha256": "90805859e8702d6fb66bbcca574ffc31e825f22866811204019187c16ed977bf"
+        },
+        {
+          "path": "plugins/resourceexplorer/plugin.json",
+          "sha256": "ff74132581626418676a90266717823fb7b8f766cecdaf280736af94c36c5005"
+        },
+        {
+          "path": "plugins/resourceexplorer/plugin.py",
+          "sha256": "21423987e10764fdb7c1c8278ca234ce8a8e8ed54be372d08d272279d5162c41"
+        }
+      ],
+      "image": "plugins/resourceexplorer/cover.png"
+    },
+    {
+      "id": "sdlstudio",
+      "name": "SDL Studio",
+      "description": "Templates funcionais SDL2 e SDL3 para C++ com CMake e janela nativa.",
+      "version": "1.0.0",
+      "category": "Gráficos",
+      "files": [
+        {
+          "path": "plugins/sdlstudio/cover.png",
+          "sha256": "76232fa0c412e791e1969aaeac03818cdcb0f809fff97419a9d8c91a593c03f1"
+        },
+        {
+          "path": "plugins/sdlstudio/plugin.json",
+          "sha256": "a3c9d7afaa9cf6ab3c9d4104760b581e07cabf683727adc5a4abdf4cc28497a1"
+        },
+        {
+          "path": "plugins/sdlstudio/plugin.py",
+          "sha256": "b8373454f95e0ed131b1d1a562fb54cbc2d2cf6091e50f235fcb7be02d500575"
+        }
+      ],
+      "image": "plugins/sdlstudio/cover.png"
+    },
+    {
+      "id": "shaderlab",
+      "name": "ShaderLab · GLSL",
+      "description": "Compila shaders reais com glslangValidator; abre prévia em glslViewer quando instalado.",
+      "version": "1.0.0",
+      "category": "Gráficos",
+      "files": [
+        {
+          "path": "plugins/shaderlab/cover.png",
+          "sha256": "5e810d914a71fda04fd00afa9714de9f07bbb34b1b84c19bc42d1529803ed99a"
+        },
+        {
+          "path": "plugins/shaderlab/plugin.json",
+          "sha256": "ff3648b83742bce2792cfb5c471c1f41d426e1f60202d42c4bc84678d0dc9cb8"
+        },
+        {
+          "path": "plugins/shaderlab/plugin.py",
+          "sha256": "5b430d27d08f40368b7f01a55ac5cbf0c56d25e7f841459a12bf81cdea504755"
+        }
+      ],
+      "image": "plugins/shaderlab/cover.png"
+    },
+    {
+      "id": "terminalprofiles",
+      "name": "Terminal Profiles",
+      "description": "Perfis Konsole para Bash, Fish, Zsh, PowerShell e Wine CMD.",
+      "version": "1.0.0",
+      "category": "Ferramentas",
+      "files": [
+        {
+          "path": "plugins/terminalprofiles/cover.png",
+          "sha256": "af58c2fe24f0806ceb6868b86fa36c575b081a7cfcac43392bad3f5b2090d517"
+        },
+        {
+          "path": "plugins/terminalprofiles/plugin.json",
+          "sha256": "9807f8581bfb1920cef054e76b7e5a95a67ac3c7ca926de87d92f70e35403b1a"
+        },
+        {
+          "path": "plugins/terminalprofiles/plugin.py",
+          "sha256": "e96d40a793906c8f55dce85b6db94d2998803edad4d61035de5bb90dfc1ff286"
+        }
+      ],
+      "image": "plugins/terminalprofiles/cover.png"
+    },
+    {
+      "id": "testrunner",
+      "name": "Test Runner",
+      "description": "Detecção de pytest, CTest (GoogleTest/Catch2) e dotnet test (xUnit/NUnit).",
+      "version": "1.0.0",
+      "category": "Testes",
+      "files": [
+        {
+          "path": "plugins/testrunner/cover.png",
+          "sha256": "7d333bb3a895e91104e477062a0d496446e74a626910500fb618a133f777b45f"
+        },
+        {
+          "path": "plugins/testrunner/plugin.json",
+          "sha256": "858761e658a355995ac41e9024766d2686184e30335b8b60a09bd617c294490a"
+        },
+        {
+          "path": "plugins/testrunner/plugin.py",
+          "sha256": "de0399376943506d667e6461957ec5f76d3b391a61d432e6330b07df63450666"
+        }
+      ],
+      "image": "plugins/testrunner/cover.png"
     },
     {
       "id": "todofinder",
       "name": "TODO Explorer",
       "description": "Localiza TODO, FIXME e HACK nos arquivos do projeto e mostra os resultados na saída.",
       "version": "1.0.0",
+      "category": "Editor",
       "files": [
         {
           "path": "plugins/todofinder/cover.png",
-          "sha256": "369cf918d40208f03d347d7a126aff419638c9a09865cf4384aa8ba39ed69a92"
+          "sha256": "6c16b8133e847014663b3ced2da70aaa9dfa01cc01a676ebd46e7516227b75fc"
         },
         {
           "path": "plugins/todofinder/plugin.json",
-          "sha256": "f0fbbf788d8a2d675a944272fe1bc54ce68480781bcfe1e460db10f9f685be62"
+          "sha256": "fb8a91505e68a8103d43ac730dda6f24d90ab0ff69075a1ee1847d278759c808"
         },
         {
           "path": "plugins/todofinder/plugin.py",
@@ -126,6 +638,50 @@
         }
       ],
       "image": "plugins/todofinder/cover.png"
+    },
+    {
+      "id": "uidesigner",
+      "name": "UI Designer",
+      "description": "Gerador visual de janelas Qt Designer (.ui) e Avalonia XAML (.axaml), com campos e botões.",
+      "version": "1.0.0",
+      "category": "Gráficos",
+      "files": [
+        {
+          "path": "plugins/uidesigner/cover.png",
+          "sha256": "6b43a2688f9740bcd223d08223cda92f4353bf285442d994d16ea75d996c448a"
+        },
+        {
+          "path": "plugins/uidesigner/plugin.json",
+          "sha256": "3efe5f7ff17a4841ec1ddd8dc1857f5ae13a232eeac51aa871a0de8e2007ece8"
+        },
+        {
+          "path": "plugins/uidesigner/plugin.py",
+          "sha256": "17a4ba69117df9c1d23ffa21e01ef666a09ef222bcbb10338e8ca8d3459a6267"
+        }
+      ],
+      "image": "plugins/uidesigner/cover.png"
+    },
+    {
+      "id": "vulkantools",
+      "name": "Vulkan Tools",
+      "description": "Template Vulkan SDK em C++ e compilação de shaders SPIR-V usando glslangValidator.",
+      "version": "1.0.0",
+      "category": "Gráficos",
+      "files": [
+        {
+          "path": "plugins/vulkantools/cover.png",
+          "sha256": "c2a5c57b09fc2734cfda178eac2d983ab3905c78affea44a45740485d2cb42c0"
+        },
+        {
+          "path": "plugins/vulkantools/plugin.json",
+          "sha256": "8dd70417f0c1ae21e9b0e20c87082f87fcafd0518bf0dc3a1b45be99e30fca4f"
+        },
+        {
+          "path": "plugins/vulkantools/plugin.py",
+          "sha256": "2ecc93ae0fa8ac72da488907ab81b8d1afb0fa6b778158c958826d7dc88b8c2e"
+        }
+      ],
+      "image": "plugins/vulkantools/cover.png"
     }
   ]
 }

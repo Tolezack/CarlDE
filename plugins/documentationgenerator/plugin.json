@@ -1,0 +1,8 @@
+{
+  "id": "documentationgenerator",
+  "name": "Documentation Generator",
+  "version": "1.0.0",
+  "description": "Geração de documentação C++ com Doxygen (HTML) e Doxyfile configurável.",
+  "image": "cover.png",
+  "category": "Ferramentas"
+}

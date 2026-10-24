@@ -1,0 +1,8 @@
+{
+  "id": "terminalprofiles",
+  "name": "Terminal Profiles",
+  "version": "1.0.0",
+  "description": "Perfis Konsole para Bash, Fish, Zsh, PowerShell e Wine CMD.",
+  "image": "cover.png",
+  "category": "Ferramentas"
+}

@@ -1,7 +1,8 @@
 {
   "id": "opentk",
-  "name": "OpenTK (.NET)",
-  "version": "1.0.0",
-  "description": "Template gráfico C# OpenTK com janela e renderização OpenGL para Linux.",
-  "image": "cover.png"
+  "name": "OpenTK 3D (.NET)",
+  "version": "2.1.0",
+  "description": "OpenTK .NET real: OpenGL 3D, shaders GLSL editáveis, ações NuGet, compilação/execução e cubo animado.",
+  "image": "cover.png",
+  "category": "Gráficos"
 }

@@ -1,29 +1,49 @@
-# CarlDE — Loja de plugins
+# CarlDE — repositório oficial de plugins
 
-Repositório de plugins e imagens para **CarlDE no Linux**, acessado automaticamente em:
+Publicar estes arquivos na **raiz** de `https://github.com/Tolezack/CarlDE`, branch `main`. Exemplo:
 
-https://github.com/Tolezack/CarlDE
+```
+Tolezack/CarlDE
+├── index.json
+├── build_catalog.py
+├── PLUGIN_API.md
+└── plugins/
+    ├── opentk/{plugin.json, plugin.py, cover.png}
+    ├── intellicode/{plugin.json, plugin.py, cover.png}
+    ├── carlai/{plugin.json, plugin.py, cover.png}
+    └── ... 28 outros plugins ...
+```
 
-## Estrutura
+A IDE CarlDE 0.4 consulta o catálogo e as capas do GitHub, mas **não baixa o código dos plugins** até você clicar BAIXAR. Depois é necessário ATIVAR. O repositório contém **31 extensões** com implementações iniciais reais ou integração com ferramentas existentes; elas não substituem nem incluem as ferramentas externas (Ollama, clangd, GDB, .NET, Vulkan etc.).
 
-- `index.json` — catálogo (nome, versão, SHA-256 e arquivo PNG por plugin)
-- `build_catalog.py` — gera novamente os hashes após mudanças
-- `plugins/<id>/plugin.json` — metadados
-- `plugins/<id>/plugin.py` — código da extensão
-- `plugins/<id>/cover.png` — **imagem mostrada na loja diretamente pelo GitHub**
+## Como publicar
 
-O pacote inclui 6 extensões: OpenTK, AutoCorrigir Código, Formatador, Git Tools, TODO Explorer e CMake Cleaner. Os dois últimos são novos nesta versão.
+1. Extraia `CarlDE_Plugins_GitHub_v4.zip`.
+2. Suba **o conteúdo** da pasta para a raiz do seu repositório (não suba a pasta envolvendo esses arquivos).
+3. Execute `python3 build_catalog.py` após editar qualquer plugin ou capa.
+4. Faça commit/push dos arquivos e acesse a loja no CarlDE.
 
-## Publicar atualização
+## Principais recursos
 
-Extraia o ZIP **diretamente na raiz** de `Tolezack/CarlDE` na branch `main` (substitua o catálogo antigo). Sempre que editar um arquivo ou PNG, rode:
+- **OpenTK 3D**: integração .NET/OpenTK oficial via NuGet; ações para restaurar, editar shaders externos e rodar cubo 3D com OpenGL 3.3, GLSL e buffers gráficos.
+- **IntelliCode LSP**: sugestões sob demanda, diagnósticos e ir para definição via servidores LSP reais; C++ com clangd, C# com csharp-ls, Python com basedpyright.
+- **CarlAI Local**: conecta a um modelo Ollama rodando apenas em `127.0.0.1:11434`; não chama serviços de IA externos.
+- **CarlDebugger**: GUI inicial sobre GDB/MI2, permite breakpoints e inspeção.
+- **CMake Studio, SDL Studio e Vulkan Tools**: edição de CMake, projetos gráficos/SDK e compilação de shaders SPIR-V.
+- **Test Runner, Code Coverage, Valgrind e perf**: executam os sistemas Linux existentes, não simulam resultados.
+- **Export Manager**: cria pacotes AppImage/DEB/RPM se as ferramentas estiverem instaladas; Flatpak gera um manifesto para finalização manual.
+- **GitHub Publisher**: usa `gh release create` e pede confirmação explícita.
+- **Outros**: UI Designer, Resource/Database Explorer, Docker Manager, Hex Editor, Regex Tester, JSON Studio, Documentation Generator, Project Wizard+, Terminal Profiles, e os plugins anteriores.
+
+## Segurança
+
+Plugins são scripts Python com permissões de usuário. Os hashes SHA-256 verificam correspondência com o catálogo, **não** identidade ou assinatura criptográfica. Ative apenas plugins de fontes confiáveis e proteja a branch principal do repositório.
+
+## Validar o catálogo
 
 ```bash
 python3 build_catalog.py
+python3 verify_plugins.py
 ```
 
-Depois faça commit/push do `index.json` e do conteúdo de `plugins/`.
-
-**Não é necessário enviar o código-fonte da IDE a este repositório** para carregar os plugins. O CarlDE só usa o catálogo e as imagens até você clicar BAIXAR, e nenhum plugin é ativado automaticamente.
-
-> Segurança: uma extensão é código Python executado sob sua conta local. Instale e ative apenas conteúdo confiável. A verificação SHA-256 evita dados adulterados em trânsito em relação ao próprio catálogo, mas não substitui assinaturas ou revisão de código.
+Observação: algumas integrações dependem de distribuições, versões de SDK, permissões e ferramentas instaladas. Veja `README.md` do ZIP da IDE para detalhes e limitações.

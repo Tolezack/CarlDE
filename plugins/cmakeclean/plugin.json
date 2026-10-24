@@ -3,5 +3,6 @@
   "name": "CMake Cleaner",
   "description": "Limpa as pastas de compilação CMake Debug e Release após confirmação.",
   "version": "1.0.0",
-  "image": "cover.png"
+  "image": "cover.png",
+  "category": "Build"
 }

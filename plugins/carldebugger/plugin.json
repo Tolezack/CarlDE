@@ -1,0 +1,8 @@
+{
+  "id": "carldebugger",
+  "name": "CarlDebugger · GDB/MI",
+  "version": "1.0.0",
+  "description": "Depuração visual C++ com GDB/MI: breakpoints, continuar, passo a passo, pilha e expressões.",
+  "image": "cover.png",
+  "category": "Debug"
+}

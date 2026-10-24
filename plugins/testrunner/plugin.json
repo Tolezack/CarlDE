@@ -1,0 +1,8 @@
+{
+  "id": "testrunner",
+  "name": "Test Runner",
+  "version": "1.0.0",
+  "description": "Detecção de pytest, CTest (GoogleTest/Catch2) e dotnet test (xUnit/NUnit).",
+  "image": "cover.png",
+  "category": "Testes"
+}

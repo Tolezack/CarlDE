@@ -1,0 +1,8 @@
+{
+  "id": "shaderlab",
+  "name": "ShaderLab · GLSL",
+  "version": "1.0.0",
+  "description": "Compila shaders reais com glslangValidator; abre prévia em glslViewer quando instalado.",
+  "image": "cover.png",
+  "category": "Gráficos"
+}
