@@ -25,9 +25,9 @@
     },
     {
       "id": "brainrotcode",
-      "name": "BrainrotCode (Voxel World + OpenTK/C++)",
-      "description": "C++17: noise 3D, cavernas, biomas, água/lava, chunks com greedy meshing, renderização OpenGL, câmera FPS e colisões. OpenTK C# mantém helpers existentes.",
-      "version": "2.0.0",
+      "name": "BrainrotCode (Engine Voxel / OpenTK / C++)",
+      "description": "Fase 01: streaming de chunks C++17, workers, meshing por chunk, VBO/GLSL 3.3, save e hot reload de controles/gameplay; preserva helpers OpenTK.",
+      "version": "3.0.0-alpha.1",
       "category": "Gráficos",
       "files": [
         {
@@ -36,11 +36,23 @@
         },
         {
           "path": "plugins/brainrotcode/README.md",
-          "sha256": "6825fc17c18316aa576f1e3e24221d61fe64f0277286619aef6f9e0dc77c87e4"
+          "sha256": "45eb57dc4ba62df202c00475986c13b90ffac45110a1a0c0eb17cb219fd61cb5"
         },
         {
           "path": "plugins/brainrotcode/brainrot.hpp",
           "sha256": "c9fe7519dca09ddf992633ebec528a6a066e7ed1f3d9938c08b9a00a5f263ee3"
+        },
+        {
+          "path": "plugins/brainrotcode/brainrot_gl.hpp",
+          "sha256": "b76456e13facc5149529f209c376cec93e790317bbd878a4cc84e5d4ed10d861"
+        },
+        {
+          "path": "plugins/brainrotcode/brainrot_live_api.h",
+          "sha256": "f163c2c61ffda5bc60338a4b2109bb3d971bde54ce9ada84681de0a6d2149afd"
+        },
+        {
+          "path": "plugins/brainrotcode/brainrot_stream.hpp",
+          "sha256": "1953d0ec1e7c8082f4a781464b22ada52363a9b507cddb646525de6bc0c1eb81"
         },
         {
           "path": "plugins/brainrotcode/brainrot_world.hpp",
@@ -52,11 +64,47 @@
         },
         {
           "path": "plugins/brainrotcode/plugin.json",
-          "sha256": "6c1eadb922abfd09b895bc9f70c09f6e5f9a06301af71db48c3fd9d93b00c563"
+          "sha256": "4758fc4e92b156a19f0bc98558d71297bb205d061c7f0e847e5343d2a8a32059"
         },
         {
           "path": "plugins/brainrotcode/plugin.py",
-          "sha256": "12d0af96bf079da5fe530781bc01e4b8df7c49445e9c2637083cac8599972c4b"
+          "sha256": "9a8d9fe73815149ba46c3009891b2e139849464719d141a47fb0615a9c587cba"
+        },
+        {
+          "path": "plugins/brainrotcode/stream_template/CMakeLists.txt",
+          "sha256": "53208467ffe66be64473655bb3b44fc8514b192a6500cd3960bd32ec5f95b263"
+        },
+        {
+          "path": "plugins/brainrotcode/stream_template/controls.cfg",
+          "sha256": "e23119046267a6002f29ec77d4d9345a654a508f7970ea490055255ea8f575c2"
+        },
+        {
+          "path": "plugins/brainrotcode/stream_template/run.sh",
+          "sha256": "ca37820600f97ae9a9c110c75690364b8051a967b39e93829575b8a94b12329e"
+        },
+        {
+          "path": "plugins/brainrotcode/stream_template/shaders/world.frag",
+          "sha256": "40531d94deb5f633dc0f55754f18f6a9f6035d7a59425d18140e98d0e9ae5b73"
+        },
+        {
+          "path": "plugins/brainrotcode/stream_template/shaders/world.vert",
+          "sha256": "ce217a81722705d1c22fe2b16965801f4c3799ecbd8b979eace76b16b8c9409f"
+        },
+        {
+          "path": "plugins/brainrotcode/stream_template/src/live_rules.cpp",
+          "sha256": "f05b39e934d795ade348aa2d82a3ccf56b10f8d3560f750a6ab9ec342c0747c3"
+        },
+        {
+          "path": "plugins/brainrotcode/stream_template/src/main.cpp",
+          "sha256": "fa35a73c2d6c5a6f9af74263adbab3471ff8c14b50883461080713f589141b65"
+        },
+        {
+          "path": "plugins/brainrotcode/stream_template/tests/test_stream.cpp",
+          "sha256": "bb0609653ac94f856be089f31b47447f7db8bcf12e75a28873fb891d3df8938f"
+        },
+        {
+          "path": "plugins/brainrotcode/stream_template/tools/rebuild_live.sh",
+          "sha256": "35e04ca03dd90a3f2b4e344af5be4f9b624baedde339f952a8b32738a42cb3c0"
         }
       ],
       "image": "plugins/brainrotcode/cover.png"

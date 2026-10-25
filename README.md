@@ -20,3 +20,10 @@ python3 verify_plugins.py
 ```
 
 Faça commit/push e atualize o catálogo dentro da IDE. Plugins executam Python com as permissões do usuário; SHA-256 apenas compara com o catálogo remoto, não é uma assinatura independente. Publique somente código revisado.
+
+### Atualização BrainrotCode 3.0 alpha
+
+O novo template Streaming Voxel contém arquivos `.sh`, `.cfg`, `.vert` e `.frag`,
+portanto recomenda-se usar **CarlDE IDE v7** ou posterior para o gerenciador de
+plugins reconhecer todas as dependências do template. As imagens continuam neste
+repositório GitHub, e os plugins só são baixados após a escolha do usuário.

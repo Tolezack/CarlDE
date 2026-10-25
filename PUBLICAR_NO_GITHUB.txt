@@ -1,0 +1,12 @@
+CARLDE PLUGINS V4
+
+REPOSITÓRIO: https://github.com/Tolezack/CarlDE
+BRANCH: main
+
+Extraia este ZIP e envie TODOS os arquivos e pastas para a RAIZ do repositório.
+index.json e build_catalog.py devem ficar na raiz, junto com a pasta plugins/.
+As capas PNG ficam dentro de plugins/<id>/cover.png e são carregadas diretamente do GitHub.
+Depois de editar plugins ou capas, execute: python3 build_catalog.py e publique o index.json atualizado.
+O pacote contém 31 plugins.
+
+CarlComplete e BrainrotCode estão em plugins/. Publique também suas capas, arquivos .cs/.hpp e o index.json atualizado.
