@@ -26,8 +26,8 @@
     {
       "id": "brainrotcode",
       "name": "BrainrotCode (Engine Voxel / OpenTK / C++)",
-      "description": "Fase 01: streaming de chunks C++17, workers, meshing por chunk, VBO/GLSL 3.3, save e hot reload de controles/gameplay; preserva helpers OpenTK.",
-      "version": "3.0.0-alpha.1",
+      "description": "Fase 02: continente, clima, montanhas, rios esculpidos, cavernas 3D, geologia, minérios e vegetação determinística sobre chunks da fase 01.",
+      "version": "3.1.0-alpha.2",
       "category": "Gráficos",
       "files": [
         {
@@ -36,11 +36,15 @@
         },
         {
           "path": "plugins/brainrotcode/README.md",
-          "sha256": "45eb57dc4ba62df202c00475986c13b90ffac45110a1a0c0eb17cb219fd61cb5"
+          "sha256": "ba76971dda9a952e32516a27339bf6b0d356b1f0495620e02116266aa8ee0703"
         },
         {
           "path": "plugins/brainrotcode/brainrot.hpp",
           "sha256": "c9fe7519dca09ddf992633ebec528a6a066e7ed1f3d9938c08b9a00a5f263ee3"
+        },
+        {
+          "path": "plugins/brainrotcode/brainrot_biomes.hpp",
+          "sha256": "5c92818f971d46d87bdb7b7a0ed28c6f7c3adfc3913c2ec811d4237fe4f528d3"
         },
         {
           "path": "plugins/brainrotcode/brainrot_gl.hpp",
@@ -52,7 +56,7 @@
         },
         {
           "path": "plugins/brainrotcode/brainrot_stream.hpp",
-          "sha256": "1953d0ec1e7c8082f4a781464b22ada52363a9b507cddb646525de6bc0c1eb81"
+          "sha256": "a5ab424d27a874a68501a2c3c062c80b7d9085c34d1c5604e36c9c6b12f9970f"
         },
         {
           "path": "plugins/brainrotcode/brainrot_world.hpp",
@@ -64,15 +68,15 @@
         },
         {
           "path": "plugins/brainrotcode/plugin.json",
-          "sha256": "4758fc4e92b156a19f0bc98558d71297bb205d061c7f0e847e5343d2a8a32059"
+          "sha256": "babad77a4d59737458a009e08c75db63eadf36f1e26ad6a3acfe4ed67ba99970"
         },
         {
           "path": "plugins/brainrotcode/plugin.py",
-          "sha256": "9a8d9fe73815149ba46c3009891b2e139849464719d141a47fb0615a9c587cba"
+          "sha256": "aea8f6e22283373bfc4169365749d39bbbdad9ec9ae74c7bbffa81fbc3dcef55"
         },
         {
           "path": "plugins/brainrotcode/stream_template/CMakeLists.txt",
-          "sha256": "53208467ffe66be64473655bb3b44fc8514b192a6500cd3960bd32ec5f95b263"
+          "sha256": "658807dfe8c52516c5c3bb088af950f2bb5c2985282cef0172b464df5e817258"
         },
         {
           "path": "plugins/brainrotcode/stream_template/controls.cfg",
@@ -84,7 +88,7 @@
         },
         {
           "path": "plugins/brainrotcode/stream_template/shaders/world.frag",
-          "sha256": "40531d94deb5f633dc0f55754f18f6a9f6035d7a59425d18140e98d0e9ae5b73"
+          "sha256": "f3985927cf00ca655ac7e2dcc986f4ac1d387d09b211eb52bc4f4ecbb93c13b0"
         },
         {
           "path": "plugins/brainrotcode/stream_template/shaders/world.vert",
@@ -96,7 +100,11 @@
         },
         {
           "path": "plugins/brainrotcode/stream_template/src/main.cpp",
-          "sha256": "fa35a73c2d6c5a6f9af74263adbab3471ff8c14b50883461080713f589141b65"
+          "sha256": "11382a95a154757c41f89cdec7e2d6a4d6b7167b71ea56776f17fd6a232d0365"
+        },
+        {
+          "path": "plugins/brainrotcode/stream_template/tests/test_biomes.cpp",
+          "sha256": "2569768d63c32932ec124e0a455d277fa617a704e279be778edcef81f3556884"
         },
         {
           "path": "plugins/brainrotcode/stream_template/tests/test_stream.cpp",
@@ -110,10 +118,36 @@
       "image": "plugins/brainrotcode/cover.png"
     },
     {
+      "id": "brainrotdoctor",
+      "name": "BrainrotDoctor",
+      "description": "Auditoria de código, CMake e problemas frequentes de câmera/raycast; proposta de reparo com backup.",
+      "version": "0.1.0-alpha",
+      "category": "Debug",
+      "files": [
+        {
+          "path": "plugins/brainrotdoctor/README.md",
+          "sha256": "e5d7f3c9e4c82681aa42cec46be4cd8686cd3fa1e9940004e504b59344908e03"
+        },
+        {
+          "path": "plugins/brainrotdoctor/cover.png",
+          "sha256": "f664638ca573c6ffc830b34f45d6c4661b8814bf865f67317fd4878771f6d276"
+        },
+        {
+          "path": "plugins/brainrotdoctor/plugin.json",
+          "sha256": "8841295ebfa882c7a3d64951f6a1e5bdd27444911267906a46f71fe0450bfe30"
+        },
+        {
+          "path": "plugins/brainrotdoctor/plugin.py",
+          "sha256": "b49ea40a1c8da338ae2c1c8fe2a86c534443da8c3fcd87ae23237a811919cd73"
+        }
+      ],
+      "image": "plugins/brainrotdoctor/cover.png"
+    },
+    {
       "id": "carlai",
       "name": "CarlAI Local · Ollama",
-      "description": "Explica, revisa e sugere código via modelos locais Ollama; resposta em janela própria.",
-      "version": "1.0.0",
+      "description": "Análise de hardware Linux, recomendação conservadora de modelo Ollama, download com confirmação e assistente local.",
+      "version": "2.0.0",
       "category": "IA local",
       "files": [
         {
@@ -122,11 +156,11 @@
         },
         {
           "path": "plugins/carlai/plugin.json",
-          "sha256": "9355c930f375b6d292915a7b17680e23f5a476143ec475577ee39a569fd1785b"
+          "sha256": "1413e9383e38a72f20aab547b49c7d1f361c93ad61369dd8ecc47e8304ca3e37"
         },
         {
           "path": "plugins/carlai/plugin.py",
-          "sha256": "ea9da060f2e2751c3fac032c80bb264971057bf47e51e4d4e6aaf60a9e517d07"
+          "sha256": "9d56f4d65d66a545f477bb8bfe568c447ff2fe0d4a751bb31e07d855522bb21d"
         }
       ],
       "image": "plugins/carlai/cover.png"
@@ -135,7 +169,7 @@
       "id": "carlcomplete",
       "name": "CarlComplete (Ollama Ghost Text)",
       "description": "Ghost Text Tab/Esc com preditor básico integrado, e sugestões IA via Ollama local opcional. Inicia/encerra somente servidor Ollama próprio com a IDE.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "category": "IA / Editor",
       "files": [
         {
@@ -148,11 +182,11 @@
         },
         {
           "path": "plugins/carlcomplete/plugin.json",
-          "sha256": "12abc9ab4517f5cefbb0982147f31e63d5a97a33268f6db48933fa2c30ca5110"
+          "sha256": "b780f1439871019abf6a5ed00600da6d3c9dc7079c04aac351bab474f0785d0b"
         },
         {
           "path": "plugins/carlcomplete/plugin.py",
-          "sha256": "b52115109cd210cbe00e25a2060c17d2b29b63fd4cd957455076d5e24bdb9512"
+          "sha256": "c1b554a6e74d51904b133c1d81b4e5f8f040d8f58137ddb7430efb095999eb8e"
         }
       ],
       "image": "plugins/carlcomplete/cover.png"
@@ -178,6 +212,32 @@
         }
       ],
       "image": "plugins/carldebugger/cover.png"
+    },
+    {
+      "id": "carltorture",
+      "name": "CarlTorture",
+      "description": "Linguagem esotérica propositalmente difícil com interpretador limitado, reversões de operações e visualização de memória.",
+      "version": "0.1.0-alpha",
+      "category": "Projetos",
+      "files": [
+        {
+          "path": "plugins/carltorture/README.md",
+          "sha256": "78fa26c26dfe73736acbac4369b5ab4ef2fd3945afd9faa8e001046ce019db5f"
+        },
+        {
+          "path": "plugins/carltorture/cover.png",
+          "sha256": "00dae1faeb9cc057b95c7668d4c68ec955bff92b223fde7fc06004bee647f255"
+        },
+        {
+          "path": "plugins/carltorture/plugin.json",
+          "sha256": "9744f1697d6b98bbc8c5587fcf2ee4ca5073b5db5377964fc01fef6494a9bee8"
+        },
+        {
+          "path": "plugins/carltorture/plugin.py",
+          "sha256": "951fca24dbed6e55ecf6b7d270eb2535f3ee60c9679b141970e64de0a6ad5c22"
+        }
+      ],
+      "image": "plugins/carltorture/cover.png"
     },
     {
       "id": "cmakeclean",
