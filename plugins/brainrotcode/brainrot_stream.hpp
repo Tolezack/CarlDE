@@ -24,6 +24,7 @@
 #include <utility>
 #include <vector>
 #include "brainrot.hpp"
+#include "brainrot_biomes.hpp"
 
 namespace br::stream {
 constexpr int EDGE=16;
@@ -37,13 +38,13 @@ inline float dot(Vec a,Vec b) {return a.x*b.x+a.y*b.y+a.z*b.z;}
 inline Vec plus(Vec a,Vec b) {return {a.x+b.x,a.y+b.y,a.z+b.z};}
 inline Vec scale(Vec a,float t) {return {a.x*t,a.y*t,a.z*t};}
 inline Vec normalize(Vec a) {float len=std::sqrt(dot(a,a));return len>1.e-6f?scale(a,1.f/len):Vec{};}
-enum Block : std::uint8_t {Air=0,Grass=1,Dirt=2,Stone=3,Sand=4,Snow=5,Log=6,Leaves=7,Water=8,Lava=9};
+enum Block : std::uint8_t {Air=0,Grass=1,Dirt=2,Stone=3,Sand=4,Snow=5,Log=6,Leaves=7,Water=8,Lava=9,Granite=10,Basalt=11,Limestone=12,Shale=13,CopperOre=14,Clay=15,Gravel=16,PineLeaves=17,PineLog=18};
 inline bool opaque(std::uint8_t id) {return id!=Air && id!=Water && id!=Lava;}
 struct Hit {bool found=false;int x=0,y=0,z=0;int nx=0,ny=0,nz=0;float distance=0;};
 struct Vertex {float x,y,z,u,v,material,shade;};
 struct MeshEvent {Key key;bool removed=false;std::vector<Vertex> vertices;};
 struct Stats {std::size_t loaded=0,queued=0,pending=0,faces=0;};
-struct Settings {int height=96,view=3,workers=2;unsigned seed=42;std::filesystem::path save_dir="brainrot_saves";};
+struct Settings {int height=96,view=3,workers=2;unsigned seed=42;std::filesystem::path save_dir="brainrot_saves_phase02";};
 
 class World {
     using Blocks=std::vector<std::uint8_t>;
@@ -71,11 +72,11 @@ class World {
     static bool rd32(std::istream& in,std::uint32_t& v) {v=0;for(int i=0;i<4;++i){int x=in.get();if(x==EOF)return false;v|=std::uint32_t(x)<<(8*i);}return true;}
     void read_edits(Key key,Blocks& blocks,std::map<std::uint32_t,std::uint8_t>& edits) const {
         std::ifstream in(path(key),std::ios::binary);if(!in)return;
-        char tag[4];if(!in.read(tag,4)||std::string(tag,4)!="BRC3")return;
+        char tag[4];if(!in.read(tag,4)||std::string(tag,4)!="BRC4")return;
         std::uint32_t seed=0,height=0,count=0;
         if(!rd32(in,seed)||!rd32(in,height)||!rd32(in,count) ||seed!=config_.seed||height!=unsigned(config_.height)||count>blocks.size())return;
         for(std::uint32_t i=0;i<count;++i) {std::uint32_t pos=0;if(!rd32(in,pos))break;int id=in.get();
-            if(id==EOF)break;if(pos<blocks.size()&&id<=Lava){blocks[pos]=std::uint8_t(id);edits[pos]=std::uint8_t(id);}}
+            if(id==EOF)break;if(pos<blocks.size()&&id<=PineLog){blocks[pos]=std::uint8_t(id);edits[pos]=std::uint8_t(id);}}
     }
     void save_chunk(Key key,Chunk& c) {
         if(!c.save_dirty)return;
@@ -83,7 +84,7 @@ class World {
         const auto dst=path(key), tmp=std::filesystem::path(dst.string()+".tmp");
         {std::ofstream out(tmp,std::ios::binary|std::ios::trunc);
             if(!out)throw std::runtime_error("Cannot save chunk " + dst.string());
-            out.write("BRC3",4);wr32(out,config_.seed);wr32(out,std::uint32_t(config_.height));wr32(out,std::uint32_t(c.edits.size()));
+            out.write("BRC4",4);wr32(out,config_.seed);wr32(out,std::uint32_t(config_.height));wr32(out,std::uint32_t(c.edits.size()));
             for(auto [at,id]:c.edits){wr32(out,at);out.put(char(id));}
             out.flush();if(!out)throw std::runtime_error("Cannot write chunk " + dst.string());}
         std::filesystem::rename(tmp,dst);c.save_dirty=false;
@@ -109,29 +110,45 @@ class World {
     Blocks generate(Key key) const {
         Blocks blocks(std::size_t(EDGE)*EDGE*config_.height,Air);
         const int H=config_.height;
-        for(int z=0;z<EDGE;++z)for(int x=0;x<EDGE;++x) {
+        for(int z=0;z<EDGE;++z)for(int x=0;x<EDGE;++x){
             const int wx=key.x*EDGE+x,wz=key.z*EDGE+z;
-            int top=std::clamp(int(terrain_height(wx,wz,config_.seed)),3,H-5);
-            const bool arid=br::value_noise(wx/102.f,wz/102.f,config_.seed+50)<-.29f;
-            for(int y=0;y<=top;++y) {
-                if(y>4&&y<top-3&&cave_noise(wx,y,wz,config_.seed)>.48f)continue;
-                const std::uint8_t id=y==top?(top>55?Snow:(arid?Sand:Grass)):(y>top-4?(arid?Sand:Dirt):Stone);
+            const auto region=br::biomes::sample(wx,wz,config_.seed);
+            const int top=std::clamp(int(region.elevation),3,H-5);
+            for(int y=0;y<=top;++y){
+                if(br::biomes::cave(wx,y,wz,config_.seed,top))continue;
+                const bool arid=region.biome==br::biomes::Biome::Desert;
+                const bool snow=region.biome==br::biomes::Biome::Alpine||region.biome==br::biomes::Biome::Taiga;
+                std::uint8_t id=y==top?(snow?Snow:(arid?Sand:Grass)):
+                    y>top-4?(arid?Sand:(region.biome==br::biomes::Biome::Marsh?Clay:Dirt)):
+                    br::biomes::geology(wx,y,wz,config_.seed);
                 blocks[slot(x,y,z,H)]=id;
             }
-            // Cross-chunk deterministic trees: sample neighboring candidate roots.
+            // Canais fluviais e oceano foram esculpidos; água visível fica para a fase 03.
         }
-        for(int lz=-3;lz<EDGE+3;++lz)for(int lx=-3;lx<EDGE+3;++lx) {
+        // Uma árvore gera o mesmo resultado em qualquer ordem de carregamento dos chunks.
+        for(int lz=-3;lz<EDGE+3;++lz)for(int lx=-3;lx<EDGE+3;++lx){
             const int wx=key.x*EDGE+lx,wz=key.z*EDGE+lz;
-            if(br::hash(wx,wz,config_.seed+77)%139!=0)continue;
-            const int top=std::clamp(int(terrain_height(wx,wz,config_.seed)),3,H-5);
-            if(top>=50||top+8>=H||br::value_noise(wx/102.f,wz/102.f,config_.seed+50)<-.29f)continue;
-            auto place=[&](int X,int Y,int Z,std::uint8_t id,bool empty_only) {
+            const auto region=br::biomes::sample(wx,wz,config_.seed);
+            const bool forest=region.biome==br::biomes::Biome::Forest;
+            const bool taiga=region.biome==br::biomes::Biome::Taiga;
+            const bool plains=region.biome==br::biomes::Biome::Plains;
+            if(!forest&&!taiga&&!plains)continue;
+            int chance=forest?60:(taiga?86:240);
+            if(br::hash(wx,wz,config_.seed+77)%chance!=0)continue;
+            const int top=std::clamp(int(region.elevation),3,H-5);
+            int trunk_height=taiga?6:4;
+            if(top+trunk_height+3>=H)continue;
+            auto place=[&](int X,int Y,int Z,std::uint8_t id,bool empty_only){
                 int xx=X-key.x*EDGE,zz=Z-key.z*EDGE;
                 if(xx<0||xx>=EDGE||zz<0||zz>=EDGE||Y<0||Y>=H)return;
-                auto i=slot(xx,Y,zz,H);if(!empty_only||blocks[i]==Air)blocks[i]=id;};
-            for(int a=1;a<=4;++a)place(wx,top+a,wz,Log,false);
-            for(int dy=-2;dy<=2;++dy)for(int dz=-2;dz<=2;++dz)for(int dx=-2;dx<=2;++dx)
-                if(dx*dx+dz*dz+dy*dy<=6)place(wx+dx,top+5+dy,wz+dz,Leaves,true);
+                auto i=slot(xx,Y,zz,H);if(!empty_only||blocks[i]==Air)blocks[i]=id;
+            };
+            const auto log=taiga?PineLog:Log,leaf=taiga?PineLeaves:Leaves;
+            for(int a=1;a<=trunk_height;++a)place(wx,top+a,wz,log,false);
+            for(int dy=-2;dy<=2;++dy)for(int dz=-2;dz<=2;++dz)for(int dx=-2;dx<=2;++dx){
+                if((taiga?(std::abs(dx)+std::abs(dz)<=2+(dy<0)):(dx*dx+dz*dz+dy*dy<=6)))
+                    place(wx+dx,top+trunk_height+dy,wz+dz,leaf,true);
+            }
         }
         return blocks;
     }
@@ -243,7 +260,7 @@ public:
         return it->second.blocks[slot(mod_floor(x,EDGE),y,mod_floor(z,EDGE),config_.height)];
     }
     bool set(int x,int y,int z,std::uint8_t id) {
-        if(y<0||y>=config_.height||id>Lava)return false;
+        if(y<0||y>=config_.height||id>PineLog)return false;
         Key k{div_floor(x,EDGE),div_floor(z,EDGE)};auto it=loaded_.find(k);if(it==loaded_.end())return false;
         auto& c=it->second;std::uint32_t at=std::uint32_t(slot(mod_floor(x,EDGE),y,mod_floor(z,EDGE),config_.height));
         if(c.blocks[at]==id)return false;

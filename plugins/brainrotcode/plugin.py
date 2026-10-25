@@ -28,7 +28,7 @@ CS_SNIPPETS = {
 def install_cpp(root: Path):
     target = root / 'include' / 'brainrot.hpp'
     target.parent.mkdir(parents=True, exist_ok=True)
-    for filename in ('brainrot.hpp', 'brainrot_world.hpp', 'brainrot_stream.hpp', 'brainrot_gl.hpp', 'brainrot_live_api.h'):
+    for filename in ('brainrot.hpp', 'brainrot_world.hpp', 'brainrot_stream.hpp', 'brainrot_biomes.hpp', 'brainrot_gl.hpp', 'brainrot_live_api.h'):
         dest = root / 'include' / filename
         # C++ headers update with plugin version (no project code is replaced).
         source = PLUGIN_DIR / filename
@@ -37,9 +37,14 @@ def install_cpp(root: Path):
         elif dest.read_bytes() != source.read_bytes():
             existing = dest.read_text(encoding='utf-8', errors='replace')
             # Upgrade known old automatically generated headers, preserve modified/custom headers.
-            known_old = (filename == 'brainrot.hpp' and
-                         ('// BrainrotCode 1.0:' in existing or '// BrainrotCode 1.1:' in existing))
+            known_old = ((filename == 'brainrot.hpp' and
+                         ('// BrainrotCode 1.0:' in existing or '// BrainrotCode 1.1:' in existing)) or
+                         (filename == 'brainrot_stream.hpp' and
+                          '// BrainrotCode 3.0 alpha - Fase 01:' in existing))
             if known_old:
+                backup = dest.with_suffix(dest.suffix + '.phase01.bak')
+                if not backup.exists():
+                    shutil.copy2(dest, backup)
                 shutil.copyfile(source, dest)
     return target
 
@@ -52,6 +57,20 @@ def install_cs(root: Path):
     return target
 
 
+def cmake_main_target(content: str) -> str | None:
+    """Select exactly the main executable, not the folder or test targets."""
+    project = re.search(r'project\s*\(\s*([A-Za-z_][\w-]*)', content, re.I)
+    candidates = []
+    for m in re.finditer(r'add_executable\s*\(\s*(\$\{PROJECT_NAME\}|[A-Za-z_][\w-]*)([^)]*)\)',content,re.I|re.S):
+        target = project.group(1) if m.group(1) == '${PROJECT_NAME}' and project else m.group(1)
+        candidates.append((target,m.group(2)))
+    if len(candidates)==1:
+        return candidates[0][0]
+    main=[target for target,files in candidates if 'src/main.cpp' in files.replace('\\','/')]
+    if len(main)==1:return main[0]
+    return None
+
+
 def cpp_include_setup(root: Path):
     """A biblioteca de UV/terreno deve funcionar sem exigir GLFW."""
     cmake = root / 'CMakeLists.txt'
@@ -61,9 +80,11 @@ def cpp_include_setup(root: Path):
     marker = '# BrainrotCode: include path'
     if marker in source or '# BrainrotCode: GLFW setup' in source:
         return False
-    block = '''
-# BrainrotCode: include path
-target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+    target = cmake_main_target(source)
+    if not target:
+        raise ValueError('CMake com múltiplos alvos ambíguos; selecione o alvo principal manualmente.')
+    block = f'''\n# BrainrotCode: include path
+    target_include_directories({target} PRIVATE "${{CMAKE_CURRENT_SOURCE_DIR}}/include")
 '''
     cmake.write_text(source.rstrip() + '\n' + block, encoding='utf-8')
     return True
@@ -79,12 +100,15 @@ def cpp_glfw_setup(root: Path):
         return False
     cpp_include_setup(root)
     source = cmake.read_text(encoding='utf-8')
-    block = '''\n# BrainrotCode: GLFW setup
+    target=cmake_main_target(source)
+    if not target:
+        raise ValueError('Não foi possível determinar o executável principal do CMake.')
+    block = f'''\n# BrainrotCode: GLFW setup
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GLFW3 REQUIRED IMPORTED_TARGET glfw3)
 find_package(OpenGL REQUIRED)
-target_compile_definitions(${PROJECT_NAME} PRIVATE BRAINROT_ENABLE_GLFW)
-target_link_libraries(${PROJECT_NAME} PRIVATE PkgConfig::GLFW3 OpenGL::GL)
+target_compile_definitions({target} PRIVATE BRAINROT_ENABLE_GLFW)
+target_link_libraries({target} PRIVATE PkgConfig::GLFW3 OpenGL::GL)
 '''
     cmake.write_text(source.rstrip() + '\n' + block, encoding='utf-8')
     return True
@@ -152,7 +176,29 @@ def post_stream(root: Path, name: str):
     cmake.write_text(source, encoding='utf-8')
     return []
 
+def post_stream_config(root: Path, name: str, api):
+    post_stream(root, name)
+    target = root / 'src' / 'main.cpp'
+    code = target.read_text(encoding='utf-8')
+    worker_setting = int(api.get_setting('worker_threads', 2))
+    code = code.replace('settings.workers=std::clamp(int(std::thread::hardware_concurrency()/2),2,4);',
+                        f'settings.workers={max(1,min(worker_setting,8))};')
+    if api.get_setting('show_debug', False):
+        code = code.replace('debug=false;', 'debug=true;')
+    target.write_text(code, encoding='utf-8')
+    path = root / 'controls.cfg'
+    content = path.read_text(encoding='utf-8')
+    content = content.replace('view_chunks=3', 'view_chunks='+str(max(1,min(12,int(api.get_setting('view_chunks',3))))))
+    path.write_text(content, encoding='utf-8')
+    return []
+
+
 def activate(api):
+    api.register_settings({
+        'worker_threads': {'type': 'int', 'label': 'Workers (novos projetos)', 'default': 2, 'min': 1, 'max': 8},
+        'view_chunks': {'type': 'int', 'label': 'Distância em chunks (novos projetos)', 'default': 3, 'min': 1, 'max': 12},
+        'show_debug': {'type': 'bool', 'label': 'Iniciar com debug visual', 'default': False}
+    })
     def root():
         project = api.project_root
         if not project:
@@ -247,15 +293,21 @@ def activate(api):
                           'Janela GLFW/OpenGL e helpers de terreno, atlas UV e malha voxel.', 'cpp', post_cpp)
     api.register_template('brainrot_voxel', 'C++ · BrainrotCode / Mundo Voxel 3D',
                           'Terreno 3D, cavernas, chunks greedy, câmera FPS, água/lava e biomas.', 'cpp', post_voxel)
-    api.register_template('brainrot_stream', 'C++ · BrainrotCode 3 / Streaming Voxel',
-                          'Workers, chunks dinamicos, OpenGL 3.3, raycast DDA e hot reload de gameplay.',
-                          'cpp', post_stream)
+    api.register_template('brainrot_stream', 'C++ · BrainrotCode 3.1 / Biomas + Streaming Voxel',
+                          'Workers/chunks, geologia, cavernas, biomas, OpenGL 3.3 e hot reload.',
+                          'cpp', lambda project,name: post_stream_config(project,name,api))
     api.register_template('brainrot_cs', 'C# · BrainrotCode / OpenTK',
                           'Janela OpenTK real em uma linha, noise, atlas UV e mesh.', 'csharp_console', post_cs)
     def ensure_cpp_opened(project):
-        # No CMake project: leave it untouched. No rewriting of src/main.cpp.
-        if project and (project / 'CMakeLists.txt').is_file() and (
-                list(project.rglob('*.cpp')) or list(project.rglob('*.hpp'))):
+        # Do not inject BrainrotCode into unrelated C++/Qt/SDL projects.
+        # Only projects that explicitly use BrainrotCode are upgraded.
+        src = project / 'src' / 'main.cpp' if project else None
+        identified = bool(project and (
+            (project / 'include' / 'brainrot.hpp').exists() or
+            (src and src.is_file() and ('brainrot.hpp' in src.read_text(encoding='utf-8',errors='replace') or
+                                      'br::World' in src.read_text(encoding='utf-8',errors='replace')))
+        ))
+        if identified and (project / 'CMakeLists.txt').is_file():
             install_cpp(project)
             cpp_include_setup(project)
             # When using a window or voxel renderer, add GLFW automatically.

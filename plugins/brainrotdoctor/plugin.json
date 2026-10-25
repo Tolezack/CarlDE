@@ -1,0 +1,8 @@
+{
+  "id": "brainrotdoctor",
+  "name": "BrainrotDoctor",
+  "version": "0.1.0-alpha",
+  "description": "Auditoria de código, CMake e problemas frequentes de câmera/raycast; proposta de reparo com backup.",
+  "category": "Debug",
+  "image": "cover.png"
+}

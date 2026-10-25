@@ -1,8 +1,33 @@
 {
   "id": "carlai",
   "name": "CarlAI Local · Ollama",
-  "version": "1.0.0",
-  "description": "Explica, revisa e sugere código via modelos locais Ollama; resposta em janela própria.",
+  "version": "2.0.0",
+  "description": "Análise de hardware Linux, recomendação conservadora de modelo Ollama, download com confirmação e assistente local.",
   "image": "cover.png",
-  "category": "IA local"
+  "category": "IA local",
+  "settings": {
+    "model": {
+      "type": "choice",
+      "label": "Modelo preferido",
+      "choices": [
+        "qwen2.5-coder:1.5b",
+        "qwen2.5-coder:3b",
+        "qwen2.5-coder:7b",
+        "qwen2.5-coder:14b"
+      ],
+      "default": "qwen2.5-coder:1.5b"
+    },
+    "prefer_selection": {
+      "type": "bool",
+      "label": "Priorizar seleção",
+      "default": true
+    },
+    "max_chars": {
+      "type": "int",
+      "label": "Limite de caracteres",
+      "min": 1000,
+      "max": 20000,
+      "default": 12000
+    }
+  }
 }

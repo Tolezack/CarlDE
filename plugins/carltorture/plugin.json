@@ -1,0 +1,8 @@
+{
+  "id": "carltorture",
+  "name": "CarlTorture",
+  "version": "0.1.0-alpha",
+  "description": "Linguagem esotérica propositalmente difícil com interpretador limitado, reversões de operações e visualização de memória.",
+  "category": "Projetos",
+  "image": "cover.png"
+}

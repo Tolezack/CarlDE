@@ -250,12 +250,12 @@ int main() {
     const fs::path assets=BR_ASSET_DIR;
     try {
         br::stream::Settings settings;settings.height=96;settings.view=3;settings.workers=std::clamp(int(std::thread::hardware_concurrency()/2),2,4);
-        settings.save_dir=assets/"saves";
+        settings.save_dir=assets/"saves_phase02";
         World world(settings);
         if(!glfwInit())throw std::runtime_error("GLFW failed to initialize: check GPU / Wayland / X11");
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,3);glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,3);
         glfwWindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
-        GLFWwindow* window=glfwCreateWindow(1280,720,"BrainrotCode 3.0 | Streaming Voxel",nullptr,nullptr);
+        GLFWwindow* window=glfwCreateWindow(1280,720,"BrainrotCode 3.1 | Biomas / Streaming Voxel",nullptr,nullptr);
         if(!window){glfwTerminate();throw std::runtime_error("OpenGL 3.3 context failed");}
         glfwMakeContextCurrent(window);glfwSwapInterval(1);gl::load();
         {

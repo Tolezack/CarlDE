@@ -129,8 +129,8 @@ class CompletionService(QObject):
         self.connections = {}
         self.requests = {}
         self.active = True
-        self.model = api.window.settings.get('carlcomplete_model', '')
-        self.enabled = api.window.settings.get('carlcomplete_enabled', True)
+        self.model = api.get_setting('model', api.window.settings.get('carlcomplete_model', ''))
+        self.enabled = api.get_setting('enabled', api.window.settings.get('carlcomplete_enabled', True))
         self._reported_error = False
         self.server = LocalModelServer()
         # GUI remains responsive: checking/starting local inference is background work.
@@ -145,7 +145,7 @@ class CompletionService(QObject):
                 if not self.active: return
                 try:
                     models = get_models()
-                    if self.active and models and not self.model:
+                    if self.active and models and self.model not in models:
                         self.model = models[0]
                         self.api.window.settings.set('carlcomplete_model', self.model)
                     return
@@ -253,11 +253,13 @@ class CompletionService(QObject):
                                           models, max(0, models.index(self.model)) if self.model in models else 0, False)
         if ok:
             self.model = model
+            self.api.set_setting('model',model)
             self.api.window.settings.set('carlcomplete_model', model)
             self.api.notify('CarlComplete: ' + model)
 
     def toggle(self):
         self.enabled = not self.enabled
+        self.api.set_setting('enabled',self.enabled)
         self.api.window.settings.set('carlcomplete_enabled', self.enabled)
         if not self.enabled:
             for editor in tuple(self.timers):
@@ -289,6 +291,17 @@ service = None
 def activate(api):
     global service
     service = CompletionService(api)
+    def apply_settings(values):
+        service.model = values.get('model', service.model)
+        service.enabled = bool(values.get('enabled', service.enabled))
+        if not service.enabled:
+            for e,t in list(service.timers.items()):
+                t.stop()
+                e.clear_ghost_text()
+    api.register_settings({
+        'enabled': {'type':'bool', 'label':'Ativar sugestões automáticas', 'default':True},
+        'model': {'type':'str','label':'Modelo instalado (Ollama)', 'default':'qwen2.5-coder:1.5b'},
+    },apply_settings)
     api.register_editor_hook(service.attach)
     api.register_action('model', 'CarlComplete · escolher modelo Ollama...', service.select_model)
     def pull_model():

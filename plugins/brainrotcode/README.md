@@ -84,3 +84,11 @@ pelo jogo usando uma interface C (veja `include/brainrot_live_api.h`).
 No Linux CachyOS: `sudo pacman -S --needed gcc cmake glfw pkgconf mesa`.
 Leia o README que acompanha o template. **Não implementa ainda as fases 02–06
 nem é uma engine equivalente ao Vintage Story.**
+
+
+## 3.1 Alpha / Fase 02
+
+Adicionado `brainrot_biomes.hpp` (incluído por `brainrot_stream.hpp`):
+noise3/fbm3, domínio deformado, continentalidade, erosão, montanhas e rios esculpidos, 8 biomas baseados em clima, geologia em camadas, minério de cobre e árvores determinísticas entre chunks.
+
+**Limites:** não há água renderizada, iluminação voxel ou erosão física; rios são depressões procedurais. Biomas e geologia são estáticos na seed. Não é equivalente ao Vintage Story. `brainrot_saves_phase02` isola o mundo novo dos saves v7.

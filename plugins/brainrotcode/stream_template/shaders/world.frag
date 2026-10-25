@@ -14,6 +14,15 @@ vec3 palette(int mat) {
     if(mat==5) return vec3(.90,.92,.94); // Snow
     if(mat==6) return vec3(.43,.27,.13); // Trunk
     if(mat==7) return vec3(.21,.48,.20); // Leaves
+    if(mat==10) return vec3(.60,.57,.55); // granite
+    if(mat==11) return vec3(.25,.27,.29); // basalt
+    if(mat==12) return vec3(.73,.70,.59); // limestone
+    if(mat==13) return vec3(.39,.43,.48); // shale
+    if(mat==14) return vec3(.64,.41,.26); // copper ore
+    if(mat==15) return vec3(.51,.44,.35); // clay
+    if(mat==16) return vec3(.53,.50,.44); // gravel
+    if(mat==17) return vec3(.14,.34,.22); // pine leaves
+    if(mat==18) return vec3(.29,.22,.15); // pine log
     return vec3(.7,.2,.8);
 }
 void main() {

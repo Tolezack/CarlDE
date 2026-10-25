@@ -1,8 +1,24 @@
 {
   "id": "brainrotcode",
   "name": "BrainrotCode (Engine Voxel / OpenTK / C++)",
-  "version": "3.0.0-alpha.1",
-  "description": "Fase 01: streaming de chunks C++17, workers, meshing por chunk, VBO/GLSL 3.3, save e hot reload de controles/gameplay; preserva helpers OpenTK.",
+  "version": "3.1.0-alpha.2",
+  "description": "Fase 02: continente, clima, montanhas, rios esculpidos, cavernas 3D, geologia, minérios e vegetação determinística sobre chunks da fase 01.",
   "category": "Gráficos",
-  "image": "cover.png"
+  "image": "cover.png",
+  "settings": {
+    "worker_threads": {
+      "type": "int",
+      "label": "Workers (novos projetos)",
+      "default": 2,
+      "min": 1,
+      "max": 8
+    },
+    "view_chunks": {
+      "type": "int",
+      "label": "Distância de chunks (novos projetos)",
+      "default": 3,
+      "min": 1,
+      "max": 12
+    }
+  }
 }
