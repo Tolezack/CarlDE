@@ -28,7 +28,7 @@ CS_SNIPPETS = {
 def install_cpp(root: Path):
     target = root / 'include' / 'brainrot.hpp'
     target.parent.mkdir(parents=True, exist_ok=True)
-    for filename in ('brainrot.hpp', 'brainrot_world.hpp'):
+    for filename in ('brainrot.hpp', 'brainrot_world.hpp', 'brainrot_stream.hpp', 'brainrot_gl.hpp', 'brainrot_live_api.h'):
         dest = root / 'include' / filename
         # C++ headers update with plugin version (no project code is replaced).
         source = PLUGIN_DIR / filename
@@ -133,6 +133,25 @@ def post_cs(root: Path, name: str):
     return [Command(('dotnet','add',str(proj),'package','OpenTK'),root,'Instalar OpenTK via NuGet')]
 
 
+
+def post_stream(root: Path, name: str):
+    """Copy a complete, standalone GL 3.3 streaming example into a new project."""
+    install_cpp(root)
+    template = PLUGIN_DIR / 'stream_template'
+    for source in template.rglob('*'):
+        if not source.is_file():
+            continue
+        dst = root / source.relative_to(template)
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, dst)
+        if dst.suffix == '.sh':
+            dst.chmod(dst.stat().st_mode | 0o111)
+    cmake = root / 'CMakeLists.txt'
+    source = cmake.read_text(encoding='utf-8')
+    source = source.replace('project(BrainrotCode_StreamDemo VERSION 0.1', f'project({name} VERSION 0.1')
+    cmake.write_text(source, encoding='utf-8')
+    return []
+
 def activate(api):
     def root():
         project = api.project_root
@@ -228,6 +247,9 @@ def activate(api):
                           'Janela GLFW/OpenGL e helpers de terreno, atlas UV e malha voxel.', 'cpp', post_cpp)
     api.register_template('brainrot_voxel', 'C++ · BrainrotCode / Mundo Voxel 3D',
                           'Terreno 3D, cavernas, chunks greedy, câmera FPS, água/lava e biomas.', 'cpp', post_voxel)
+    api.register_template('brainrot_stream', 'C++ · BrainrotCode 3 / Streaming Voxel',
+                          'Workers, chunks dinamicos, OpenGL 3.3, raycast DDA e hot reload de gameplay.',
+                          'cpp', post_stream)
     api.register_template('brainrot_cs', 'C# · BrainrotCode / OpenTK',
                           'Janela OpenTK real em uma linha, noise, atlas UV e mesh.', 'csharp_console', post_cs)
     def ensure_cpp_opened(project):
@@ -267,4 +289,5 @@ def activate(api):
         target.write_text(VOXEL_MAIN,encoding='utf-8')
         api.notify('Mundo voxel pronto. Reabra src/main.cpp no editor e execute (F5).')
 
-    api.register_action('voxel', 'BrainrotCode · criar mundo voxel de teste...', new_voxel_project)
+    api.register_action('voxel', 'BrainrotCode · criar mundo voxel de teste (legado)...', new_voxel_project)
+    api.register_action('stream_setup', 'BrainrotCode · instalar headers da Engine 3 (sem alterar main.cpp)', setup_cpp)

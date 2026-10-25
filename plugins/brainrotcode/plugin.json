@@ -1,8 +1,8 @@
 {
   "id": "brainrotcode",
-  "name": "BrainrotCode (Voxel World + OpenTK/C++)",
-  "version": "2.0.0",
-  "description": "C++17: noise 3D, cavernas, biomas, água/lava, chunks com greedy meshing, renderização OpenGL, câmera FPS e colisões. OpenTK C# mantém helpers existentes.",
+  "name": "BrainrotCode (Engine Voxel / OpenTK / C++)",
+  "version": "3.0.0-alpha.1",
+  "description": "Fase 01: streaming de chunks C++17, workers, meshing por chunk, VBO/GLSL 3.3, save e hot reload de controles/gameplay; preserva helpers OpenTK.",
   "category": "Gráficos",
   "image": "cover.png"
 }

@@ -65,3 +65,22 @@ var mesh = Brainrot.Block(new []{1,1,2,3,4,5});
 ```
 
 O **mundo voxel 2.0** foi implementado em **C++**, não foi portado ainda para C#/OpenTK. São bibliotecas opcionais: C++ tradicional e OpenTK tradicional continuam disponíveis.
+
+## 3.0 alpha — Novo template Streaming Voxel (Fase 01)
+
+Selecione **C++ · BrainrotCode 3 / Streaming Voxel** no criador de projetos do CarlDE.
+O novo template copia `brainrot_stream.hpp`, `brainrot_gl.hpp`, `brainrot_live_api.h`,
+`src/main.cpp`, `src/live_rules.cpp`, `shaders/world.vert/frag`, `controls.cfg`,
+`CMakeLists.txt` e scripts de execução/hot reload. A versão antiga de `br::World`
+continua disponível sem modificações.
+
+O núcleo `br::stream::World` inclui geração em workers, meshing greedy por chunk,
+limite de jobs, streaming, salvamento incremental e raycast DDA. O demo usa
+OpenGL 3.3 VAO/VBO e shaders GLSL externos. Controles, sensibilidade, alcance
+do raycast e render distance são recarregáveis a partir de `controls.cfg`.
+Alterações a `src/live_rules.cpp` são compiladas automaticamente e carregadas
+pelo jogo usando uma interface C (veja `include/brainrot_live_api.h`).
+
+No Linux CachyOS: `sudo pacman -S --needed gcc cmake glfw pkgconf mesa`.
+Leia o README que acompanha o template. **Não implementa ainda as fases 02–06
+nem é uma engine equivalente ao Vintage Story.**
