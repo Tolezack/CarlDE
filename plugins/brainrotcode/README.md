@@ -1,58 +1,67 @@
-# BrainrotCode
+# BrainrotCode 2.0 — API C++17 e OpenTK C#
 
-API de conveniência opcional; **não altera a linguagem** C++ ou C#. O pacote OpenTK é instalado pelo NuGet para projetos C#, e GLFW/OpenGL (pacotes do Linux) são necessários somente para janelas C++. A versão 1.0 não cobre literalmente todas as APIs de C++/OpenTK; oferece atalhos iniciais para operações recorrentes.
+## Instalação automática
 
-## Criar um projeto novo
+Após **BAIXAR + ATIVAR** no CarlDE v0.6, ao criar ou abrir um projeto C++ com `CMakeLists.txt`, o plugin:
 
-Após instalar e ativar o plugin, use **Novo projeto** → **C# · BrainrotCode / OpenTK** ou **C++ · BrainrotCode / OpenGL**.
+- Gera `include/brainrot.hpp` e `include/brainrot_world.hpp` se faltarem;
+- Adiciona o caminho de inclusão no `CMakeLists.txt` sem substituir o código do usuário;
+- Se encontrar `br::World` ou `br::window` em `src/main.cpp`, configura GLFW/OpenGL no CMake;
+- Só substitui `src/main.cpp` na ação explícita de geração de exemplo, com backup/confirmação.
 
-## C++17 (sem dependência externa para terreno/UV)
+Cabeçalhos antigos originais BrainrotCode 1.x podem ser atualizados automaticamente. Cabeçalhos editados pelo usuário não são substituídos à força.
+
+No CachyOS:
+
+```bash
+sudo pacman -S --needed glfw mesa pkgconf gcc cmake
+```
+
+## Novo template — C++ · BrainrotCode / Mundo Voxel 3D
+
+Crie pelo assistente de projetos ou use `Ferramentas → BrainrotCode · criar mundo voxel de teste...` (confirmação e backup).
 
 ```cpp
 #include "brainrot.hpp"
-auto map = br::terrain(128,128,1234,48.0f,5); // 16384 alturas
-// Ordem das faces: frente, trás, esquerda, direita, cima, baixo
-auto block = br::block_mesh({1,1,2,2,3,4},16,16);
-auto uv = br::block_uv(5,16,16);
+#include <iostream>
+int main() {
+    br::World mundo(80, 80, 72, 42); // largura, profundidade, altura, seed
+    mundo.biomes(true).greedyMeshing(true).chunks(16).renderDistance(5);
+    mundo.generate();
+    std::cout << mundo.face_count() << " faces\n";
+    mundo.run("BrainrotCode | Mundo voxel");
+}
 ```
 
-Janela OpenGL real usando GLFW (requer `#define BRAINROT_ENABLE_GLFW`, CMake configurado e pacotes glfw / pkgconf / OpenGL):
+Controles do exemplo: mouse olha, **WASD** anda, **Espaço** pula, **F** voa, **Ctrl** corre, **Esc** solta/captura mouse, **Q** sai, **LMB** quebra, **RMB** coloca, teclas **1–4** alternam bloco/pedra/água/lava/madeira.
 
-```cpp
-#include "brainrot.hpp"
-int main(){ br::window("Meu Jogo",960,540); }
-```
+### API de mundo voxel realmente implementada (protótipo)
 
-## C# / OpenTK 4
+| API | Efeito |
+|---|---|
+| `br::noise3(x,y,z,seed)` e `br::fbm3(...)` | Noise 3D interpolado / fractal |
+| `World::generate()` | Mundo de dimensões finitas, heightmap com escarpas, cavernas internas, água rasa e árvores |
+| `World::biomes(bool)` | Biomas simplificados: neve, areia, grama |
+| `World::greedyMeshing(bool)` | Une faces de blocos coplanares iguais por chunk |
+| `World::chunks(size)` | Altera tamanho dos chunks de malha |
+| `World::renderDistance(chunks)` | Distância de desenho dos líquidos (sólidos do protótipo são desenhados globalmente) |
+| `World::place_liquid(...)` e `step_fluids(budget)` | Água/lava em células com níveis 1–7 e fluxo simples |
+| `World::collides(...)` | Colisão AABB básica |
+| `World::set/get/surface` | Acesso direto aos blocos |
+| `World::run()` | Janela GLFW OpenGL 2.1 (compatibility), câmera FPS, voo, pulo, mouse, blocos e renderização |
+| `block_uv`, `block_mesh`, `terrain` | APIs anteriores mantidas |
+
+O renderizador usa **atlas procedural gerado na memória** com pixel art, **neblina linear**, **iluminação por face** e ciclo de brilho. **Ainda não possui** sombras projetadas, iluminação voxel propagada, shaders GLSL configuráveis, chunks assíncronos, geração infinita, física avançada de líquidos, salvamento de mundos ou desempenho e mecânicas no nível de Vintage Story. A renderização usa OpenGL de compatibilidade por simplicidade e precisa de teste numa máquina Linux com GLFW/OpenGL real.
+
+## C# / OpenTK
+
+O helper `Brainrot.cs` continua permitindo:
 
 ```csharp
-BrainrotCode.Brainrot.Window("Meu Jogo",960,540); // abre e executa janela OpenGL
-var terrain = BrainrotCode.Brainrot.Terrain(128,128,42);
-var cube = BrainrotCode.Brainrot.Block(new[]{1,1,2,2,3,4});
-var uv = BrainrotCode.Brainrot.BlockUV(5,16,16);
+using BrainrotCode;
+Brainrot.Window("Meu jogo", 1280, 720);
+var heights = Brainrot.Terrain(64,64,42);
+var mesh = Brainrot.Block(new []{1,1,2,3,4,5});
 ```
 
-`Block` retorna vértices e índices; **não chama o renderer automaticamente**. Renderize com seus próprios shaders e VBO/VAO. As alturas são determinísticas em ambas as versões, mas não garantimos resultados bit a bit idênticos entre C++ e C#.
-
-
-## Corrigir o erro `br does not name a type`
-
-C++ não executa funções soltas na raiz de um `.cpp`. **É obrigatório** ter `#include "brainrot.hpp"` e colocar a chamada em `int main()`. No CarlDE, **Ferramentas → BrainrotCode → corrigir/criar janela C++ compilável...** cria um `src/main.cpp` pronto, coloca o header em `include/`, configura o CMake e faz backup do código antigo (com confirmação).
-
-No CachyOS/Arch atual:
-
-```bash
-sudo pacman -S --needed glfw mesa pkgconf cmake gcc
-```
-
-O `C# BrainrotCode.Brainrot.Window(...)` funciona **somente** em projetos C# com OpenTK e `.csproj`, não em `main.cpp`.
-
-Para compilar manualmente C++:
-
-```bash
-cmake -S . -B build/Debug -DCMAKE_BUILD_TYPE=Debug
-cmake --build build/Debug
-./build/Debug/NOME_DO_PROJETO
-```
-
-> A biblioteca `br::terrain`/`br::block_uv` pode funcionar sem GLFW. A janela `br::window` precisa de GLFW e OpenGL configurados no CMake.
+O **mundo voxel 2.0** foi implementado em **C++**, não foi portado ainda para C#/OpenTK. São bibliotecas opcionais: C++ tradicional e OpenTK tradicional continuam disponíveis.

@@ -1,5 +1,5 @@
 #pragma once
-// BrainrotCode 1.0: header-only, C++17. Terrain/UV require only the standard library.
+// BrainrotCode 2.0: header-only, C++17. Terrain/UV require only the standard library.
 // To use the OpenGL window shortcut, define BRAINROT_ENABLE_GLFW and link GLFW + OpenGL.
 #include <algorithm>
 #include <array>
@@ -96,3 +96,6 @@ inline void window(const std::string& title = "BrainrotCode", int width = 960, i
 }
 #endif
 }
+
+// Extended voxel engine (no extra include required).
+#include "brainrot_world.hpp"

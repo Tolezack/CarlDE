@@ -4,12 +4,57 @@ No remote API. Requires a running Ollama instance on 127.0.0.1:11434.
 import json
 import re
 import threading
+import subprocess
+import shutil
+import time
+from contextlib import suppress
 from urllib.request import Request, urlopen
 from PySide6.QtCore import QObject, QTimer, Signal
 from PySide6.QtWidgets import QInputDialog, QMessageBox
 
 HOST = 'http://127.0.0.1:11434'
 MAX_CHARS = 1400
+
+class LocalModelServer:
+    """Starts Ollama only if locally installed and port is not already served.
+    Never kills an Ollama service it did not start.
+    Model weights are NOT bundled; user explicitly pulls a model once.
+    """
+    def __init__(self):
+        self.process = None
+        self.lock = threading.Lock()
+        self.stopped = False
+
+    def start(self):
+        try:
+            get_models()
+            return 'Serviço Ollama existente encontrado; será reutilizado.'
+        except Exception:
+            pass
+        binary = shutil.which('ollama')
+        if not binary:
+            return 'Ollama não instalado. Ghost Text usa modelo local: instale Ollama e baixe um modelo.'
+        with self.lock:
+            if self.stopped:
+                return 'Início cancelado: a IDE está encerrando.'
+            self.process = subprocess.Popen([binary, 'serve'], stdin=subprocess.DEVNULL,
+                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                            start_new_session=True)
+        return 'Servidor Ollama iniciado pelo CarlComplete (será encerrado ao sair).'
+
+    def stop(self):
+        with self.lock:
+            self.stopped = True
+            proc, self.process = self.process, None
+        if proc and proc.poll() is None:
+            proc.terminate()
+            try:
+                proc.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                with suppress(subprocess.TimeoutExpired):
+                    proc.wait(timeout=1)
+
 
 
 def get_models():
@@ -28,6 +73,23 @@ def make_prompt(before, after, filename):
             f'<AFTER>\n{after[:240]}\n</AFTER>\n'
             'Output the missing continuation:')
 
+
+def builtin_predict(before, after, filename):
+    """Tiny fully local pattern predictor. Not an LLM, needs no model weights.
+    Suggests continuation of similar lines from the current document.
+    """
+    line = before.rsplit('\n', 1)[-1]
+    if len(line.strip()) < 3 or after.startswith(line):
+        return ''
+    lines = before[:-len(line)].splitlines() if line else before.splitlines()
+    for i in range(len(lines)-1, -1, -1):
+        old = lines[i]
+        if old.startswith(line) and len(old) > len(line):
+            result = old[len(line):]
+            if i + 1 < len(lines) and lines[i+1].strip() and len(result) < 100:
+                result += '\n' + lines[i+1]
+            return result[:240]
+    return ''
 
 def cleanup_output(result):
     text = result.replace('\r', '')
@@ -70,6 +132,27 @@ class CompletionService(QObject):
         self.model = api.window.settings.get('carlcomplete_model', '')
         self.enabled = api.window.settings.get('carlcomplete_enabled', True)
         self._reported_error = False
+        self.server = LocalModelServer()
+        # GUI remains responsive: checking/starting local inference is background work.
+        self._server_thread = threading.Thread(target=self._start_server, daemon=True)
+        self._server_thread.start()
+
+    def _start_server(self):
+        try:
+            self.server.start()
+            # If no model was configured yet, choose one already installed.
+            for _ in range(10):
+                if not self.active: return
+                try:
+                    models = get_models()
+                    if self.active and models and not self.model:
+                        self.model = models[0]
+                        self.api.window.settings.set('carlcomplete_model', self.model)
+                    return
+                except Exception:
+                    time.sleep(.3)
+        except Exception:
+            return
 
     def attach(self, editor):
         if editor in self.timers:
@@ -105,7 +188,7 @@ class CompletionService(QObject):
             self.timers[editor].start()
 
     def send(self, editor):
-        if not self.active or not self.enabled or not self.model or not editor.path:
+        if not self.active or not self.enabled or not editor.path:
             return
         cursor = editor.textCursor()
         if cursor.hasSelection():
@@ -118,6 +201,10 @@ class CompletionService(QObject):
         serial = self.requests.get(editor, 0)
         prompt = make_prompt(before, after, editor.path.name)
         model = self.model
+        fallback = builtin_predict(before, after, editor.path.name)
+        if not model:
+            self.receive(editor, serial, position, fallback)
+            return
         def worker():
             try:
                 answer = completion(model, prompt)
@@ -126,6 +213,8 @@ class CompletionService(QObject):
             except Exception as exc:
                 if self.active:
                     try:
+                        if fallback:
+                            self.channel.finished.emit(editor, serial, position, fallback)
                         self.channel.error.emit(str(exc))
                     except RuntimeError:
                         pass
@@ -178,6 +267,7 @@ class CompletionService(QObject):
 
     def stop(self):
         self.active = False
+        self.server.stop()
         self.channel.finished.disconnect(self.receive)
         self.channel.error.disconnect(self.error)
         for editor, timer in list(self.timers.items()):
@@ -201,12 +291,31 @@ def activate(api):
     service = CompletionService(api)
     api.register_editor_hook(service.attach)
     api.register_action('model', 'CarlComplete · escolher modelo Ollama...', service.select_model)
+    def pull_model():
+        import shutil
+        from PySide6.QtWidgets import QMessageBox
+        choice = QMessageBox.question(api.window, 'CarlComplete · modelo local',
+                    'Baixar qwen2.5-coder:1.5b para autocomplete?\n'
+                    'A instalação usa a internet apenas para baixar o modelo e ocupa espaço em disco.\n'
+                    'O processamento das sugestões ocorrerá localmente. Continuar?',
+                    QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                    QMessageBox.StandardButton.No)
+        if choice != QMessageBox.StandardButton.Yes:return
+        if not shutil.which('ollama'):
+            api.notify('Instale Ollama para baixar o modelo local.',error=True)
+            return
+        if not shutil.which('konsole'):
+            api.notify('Konsole não encontrado. Execute: ollama pull qwen2.5-coder:1.5b',error=True)
+            return
+        subprocess.Popen(['konsole','--hold','-e','ollama','pull','qwen2.5-coder:1.5b'])
+    api.register_action('install_model', 'CarlComplete · baixar modelo local (sob confirmação)...', pull_model)
     api.register_action('enabled', 'CarlComplete · ativar/desativar sugestões', service.toggle)
     api.register_action('manual', 'CarlComplete · sugerir agora',
                         lambda: service.send(api.window.current_editor()) if api.window.current_editor() else None,
                         shortcut='Ctrl+Alt+Space')
     if not service.model:
-        api.window.append_output('CarlComplete: selecione um modelo em Ferramentas → CarlComplete.\n')
+        api.window.append_output('CarlComplete: iniciando modelo local, se instalado. '
+                                 'Caso não tenha pesos, use Ferramentas → CarlComplete → baixar modelo.\n')
 
 
 def deactivate():

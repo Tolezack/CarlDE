@@ -1,8 +1,8 @@
 {
   "id": "brainrotcode",
-  "name": "BrainrotCode (OpenTK + C++ rápido)",
-  "version": "1.1.0",
-  "description": "Atalhos reais para janelas OpenGL, terrenos procedurais, blocos voxel e atlas UV em C++17/GLFW e C#/OpenTK.",
+  "name": "BrainrotCode (Voxel World + OpenTK/C++)",
+  "version": "2.0.0",
+  "description": "C++17: noise 3D, cavernas, biomas, água/lava, chunks com greedy meshing, renderização OpenGL, câmera FPS e colisões. OpenTK C# mantém helpers existentes.",
   "category": "Gráficos",
   "image": "cover.png"
 }
