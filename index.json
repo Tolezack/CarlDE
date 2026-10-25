@@ -25,9 +25,9 @@
     },
     {
       "id": "brainrotcode",
-      "name": "BrainrotCode (OpenTK + C++ rápido)",
-      "description": "Atalhos reais para janelas OpenGL, terrenos procedurais, blocos voxel e atlas UV em C++17/GLFW e C#/OpenTK.",
-      "version": "1.1.0",
+      "name": "BrainrotCode (Voxel World + OpenTK/C++)",
+      "description": "C++17: noise 3D, cavernas, biomas, água/lava, chunks com greedy meshing, renderização OpenGL, câmera FPS e colisões. OpenTK C# mantém helpers existentes.",
+      "version": "2.0.0",
       "category": "Gráficos",
       "files": [
         {
@@ -36,11 +36,15 @@
         },
         {
           "path": "plugins/brainrotcode/README.md",
-          "sha256": "dc29060c717dcfb1224fb0e0b8b89c3806f652817b0d8351d3ee0ca0a0d6cfe4"
+          "sha256": "6825fc17c18316aa576f1e3e24221d61fe64f0277286619aef6f9e0dc77c87e4"
         },
         {
           "path": "plugins/brainrotcode/brainrot.hpp",
-          "sha256": "8a77b9d151a43d5da5bc3999696673433aa730dc4b756fe5c4e2a7ae9a4663a0"
+          "sha256": "c9fe7519dca09ddf992633ebec528a6a066e7ed1f3d9938c08b9a00a5f263ee3"
+        },
+        {
+          "path": "plugins/brainrotcode/brainrot_world.hpp",
+          "sha256": "dd6539b4b454f91a14d18ac596379bc188b70a30ea9be5c71cdb30a1ed9905cf"
         },
         {
           "path": "plugins/brainrotcode/cover.png",
@@ -48,11 +52,11 @@
         },
         {
           "path": "plugins/brainrotcode/plugin.json",
-          "sha256": "65810fc7d37aa986d7ecac99f14b5c8fdb01103e9a119f6657ba640edb3d3473"
+          "sha256": "6c1eadb922abfd09b895bc9f70c09f6e5f9a06301af71db48c3fd9d93b00c563"
         },
         {
           "path": "plugins/brainrotcode/plugin.py",
-          "sha256": "ef1409e49621cf8ee2480d6d2ccac88ed21b3688a761a52792afde8f2491ab7e"
+          "sha256": "12d0af96bf079da5fe530781bc01e4b8df7c49445e9c2637083cac8599972c4b"
         }
       ],
       "image": "plugins/brainrotcode/cover.png"
@@ -82,13 +86,13 @@
     {
       "id": "carlcomplete",
       "name": "CarlComplete (Ollama Ghost Text)",
-      "description": "Autocomplete de linhas de código no Ollama local: sugestão cinza, Tab aceita, Esc descarta, consulta assíncrona.",
-      "version": "1.0.0",
+      "description": "Ghost Text Tab/Esc com preditor básico integrado, e sugestões IA via Ollama local opcional. Inicia/encerra somente servidor Ollama próprio com a IDE.",
+      "version": "1.1.0",
       "category": "IA / Editor",
       "files": [
         {
           "path": "plugins/carlcomplete/README.md",
-          "sha256": "4cdfcb40c0ef5b296b3ba75cc71cda213b3b8503ee98589813a6004c999dec8a"
+          "sha256": "12d697e322c920eb4128985d4aac6ea9b19e194a7275751092bbbd72b25fc5b0"
         },
         {
           "path": "plugins/carlcomplete/cover.png",
@@ -96,11 +100,11 @@
         },
         {
           "path": "plugins/carlcomplete/plugin.json",
-          "sha256": "559bdde3af295e65ff10c2cc7b271634d0bfffcbee777d8aa55f40740b6f5e53"
+          "sha256": "12abc9ab4517f5cefbb0982147f31e63d5a97a33268f6db48933fa2c30ca5110"
         },
         {
           "path": "plugins/carlcomplete/plugin.py",
-          "sha256": "1b07b1e7066186a393281858d3e98339ca90e31106d2e30a8b2bd3fcaeea350f"
+          "sha256": "b52115109cd210cbe00e25a2060c17d2b29b63fd4cd957455076d5e24bdb9512"
         }
       ],
       "image": "plugins/carlcomplete/cover.png"

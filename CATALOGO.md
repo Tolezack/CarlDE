@@ -37,3 +37,8 @@ Publique as pastas `plugins/` e o arquivo `index.json` na raiz do repositório.
 | TODO Explorer (`todofinder`) | Editor | 1.0.0 |
 | UI Designer (`uidesigner`) | Gráficos | 1.0.0 |
 | Vulkan Tools (`vulkantools`) | Gráficos | 1.0.0 |
+
+## Atualização v6
+
+- BrainrotCode 2.0: mundo voxel C++ experimental, cabeçalhos automáticos e template completo.
+- CarlComplete 1.1: servidor Ollama local gerenciado e fallback de autocomplete estatístico integrado.
